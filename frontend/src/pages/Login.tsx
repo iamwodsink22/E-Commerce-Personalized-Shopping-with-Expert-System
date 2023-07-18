@@ -8,6 +8,7 @@ import { useFormik } from "formik"
 import * as Yup from 'yup'
 import {useState} from 'react'
 import { Theme } from "@emotion/react"
+import { toast } from "react-hot-toast"
 
 
 export const TextFieldWrapper = styled(Box)(({ theme }:any) => ({
@@ -35,9 +36,10 @@ const Login = () => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     let navigate = useNavigate();
-    const submitForm=()=>{
-
-    }
+const submitForm=()=>{
+setLoading(true)
+toast.success("Logged-in Successfully")
+}    
   const { errors, values, touched, handleBlur, handleChange, handleSubmit }=useFormik({
     initialValues:{
         email:'arakshapuri22@gmail.com',

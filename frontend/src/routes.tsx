@@ -1,5 +1,6 @@
 import { LazyExoticComponent,Suspense,FC,lazy } from "react";
 import LoadingScreen from "./components/LoadingScreen";
+import Register from "pages/Register";
 const Loadable = (Component:LazyExoticComponent<FC>) => (props:any) =>
   (
     <Suspense fallback={<LoadingScreen />}>
@@ -13,5 +14,8 @@ const Loadable = (Component:LazyExoticComponent<FC>) => (props:any) =>
       element: (
         <Login />
        ),
+    },{
+      path:'/register',
+      element:(<Register/>)
     }]
 export default routes
