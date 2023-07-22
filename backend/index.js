@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const authRoute = require('./routes/auth.js')
 const productRoute = require('./routes/product.js')
-
+const userRoute = require('./routes/user.js')
 const app = express();
 
 
@@ -22,7 +22,7 @@ mongoose.connect(process.env.MONGO_CONNECTION).then(() => {
 app.use(express.json())
 app.use('/api/auth', authRoute)
 app.use('/api/products', productRoute)
-
+app.use('/api/users', userRoute)
 app.listen(process.env.PORT || 8000, () => {
     console.log("Listening to port 8000")
 })
