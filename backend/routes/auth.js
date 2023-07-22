@@ -28,33 +28,36 @@ router.post('/login', async(req,res) => {
             username : req.body.username
         })
         
-
-        !user && res.status(401).json("Wrong Username")
-
+        if(!user){
+            return res.status(401).json("Wrong username")
+        }
         const hashedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASS_SEC)
 
         const originalPassword =hashedPassword.toString(CryptoJS.enc.Utf8)
-        console.log(originalPassword)
+        // console.log(originalPassword)
 
         const inputPassword = req.body.password
 
-        console.log(inputPassword)
+        // console.log(inputPassword)
 
-        originalPassword != inputPassword && res.status(401).json("Wrong Password")
+        if(originalPassword != inputPassword){
+            return res.status(401).json("Wrong Password")
+        }
 
         const accessToken = jwt.sign({
             id : user._id,
             isAdmin: user.isAdmin
         }, process.env.JWT_SEC, {"expiresIn" : "1d"})
 
-        console.log(accessToken)
-        console.log(user._doc)
+        // console.log(accessToken)
+        // console.log(user._doc)
 
         const {password,...others} = user._doc
 
         return res.status(200).json({...others, accessToken})
     }
     catch(err){
+        console.log(err)
         return res.status(500).json(err)
     }
 
