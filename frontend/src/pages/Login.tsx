@@ -39,6 +39,7 @@ const Login = () => {
 const submitForm=()=>{
 setLoading(true)
 toast.success("Logged-in Successfully")
+navigate('/dashboard')
 }    
   const { errors, values, touched, handleBlur, handleChange, handleSubmit }=useFormik({
     initialValues:{

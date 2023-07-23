@@ -1,6 +1,7 @@
 import { LazyExoticComponent,Suspense,FC,lazy } from "react";
 import LoadingScreen from "./components/LoadingScreen";
 import Register from "pages/Register";
+import Dashboard from "pages/Dashboard";
 const Loadable = (Component:LazyExoticComponent<FC>) => (props:any) =>
   (
     <Suspense fallback={<LoadingScreen />}>
@@ -17,5 +18,8 @@ const Loadable = (Component:LazyExoticComponent<FC>) => (props:any) =>
     },{
       path:'/register',
       element:(<Register/>)
+    },{
+      path:'/dashboard',
+      element:<Dashboard/>
     }]
 export default routes
