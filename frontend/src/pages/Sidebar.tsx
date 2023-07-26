@@ -36,12 +36,12 @@ const Sidebar:FC<SidebarProps> = ({sidebar,setsidebar}) => {
   return (
     
 
-    <Box sx={{position:'absolute',top:'2vh',left:0,height:'100%',width:'6vw',backgroundColor:'transparent',display:'block',
-    justifyContent:'center',pt:'5vh'}}>
-      <Box mt='5vh'>
+    <Box sx={{position:'absolute',top:'3vh',left:0,height:'100%',width:'6vw',backgroundColor:'transparent',display:'block',
+    justifyContent:'center',pt:'5vh', borderRight:'1px solid black'}}>
+      <Box mt='7vh'>
       {sidebar&&<KeyboardDoubleArrowLeftTwoToneIcon fontSize='large'sx={{cursor:'pointer',top:'2vh',left:'1.5vw',position:'absolute'}} onClick={()=>setsidebar(false)}/>}
         {sidebarItems.map((item,index)=>{return(
-          <Box width={38} mb={10} ml={3} >
+          <Box width={38} mb={8} ml={3} >
                <Tooltip title={item.name} placement='right' key={index}>
              <item.icon
                 sx={{

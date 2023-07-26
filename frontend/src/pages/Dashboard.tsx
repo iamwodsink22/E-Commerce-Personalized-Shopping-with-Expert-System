@@ -21,7 +21,7 @@ const Dashboard:FC = () => {
   const [sidebar,setsidebar]=useState(false)
   return (
       <Box top={0} left={0} position={'absolute'} width='100vw' height='100vh' sx={{backgroundColor:'#cccccc'}}>
-      {!sidebar&&<Box sx={{cursor:'pointer',position:'absolute',top:'4.5vh'}} fontSize='large' onClick={()=>setsidebar(!sidebar)}>
+      {!sidebar&&<Box sx={{cursor:'pointer',position:'absolute',top:'5.2vh',left:'1.2vw'}} fontSize='large' onClick={()=>setsidebar(!sidebar)}>
       
             <ToggleIcon />
             <ToggleIcon />

@@ -5,7 +5,7 @@ import Shop2OutlinedIcon from '@mui/icons-material/Shop2Outlined';
 const Welcome = () => {
   return (
     // <Box width='100%' height='100%'>
-    <Box position={'absolute'} top={0} left={'10vw'}>
+    <Box position={'absolute'} top={-2} left={'10vw'}>
         <nav style={{display:'flex',justifyContent:'space-between',alignItems:'center',paddingTop:'1.5rem',paddingBottom:'1.5rem'}} >
         <div>
           <Shop2OutlinedIcon sx={{mt:'1vh'}} />
@@ -18,7 +18,7 @@ const Welcome = () => {
          
             <li style={{margin:'0 3vw'}}>
               <button style={{color:'#fff',borderRadius: '10vh',
-  backgroundColor: '#2c2d2d',width:'5vw'}}>
+  backgroundColor: '#2c2d2d',width:'5vw',height:'4vh'}}>
                 <Link style={{textDecoration:'none',color:'white',fontFamily:'"Poppins",sans-serif'}} to="/cart">My Cart</Link>
               </button>
             </li>
