@@ -1,14 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import TitleContextProvider from "contexts/TitleContext";
+import { AuthProvider } from "contexts/JWTAuthContext";
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
+    <AuthProvider>
+<TitleContextProvider>
+
     <BrowserRouter>
     <App />
     </BrowserRouter>
+</TitleContextProvider>
+    </AuthProvider>
   </React.StrictMode>, document.getElementById("root")
 );
 

@@ -1,35 +1,50 @@
-import React,{Fragment,FC,useState} from 'react'
-import Sidebar from './Sidebar'
-
-import Navbar from './Navbar'
-import Welcome from './Welcome';
-import KeyboardDoubleArrowRightTwoToneIcon from '@mui/icons-material/KeyboardDoubleArrowRightTwoTone';
-import { Box, styled } from '@mui/material';
-const ToggleIcon = styled(Box)(({ theme }:any) => ({
-  width: 25,
-  height: 3,
-  margin: "5px",
-  borderRadius: "10px",
-  transition: "width 0.3s",
-  backgroundColor: 'black',
-}));
-
-
-
-
-const Dashboard:FC = () => {
-  const [sidebar,setsidebar]=useState(false)
-  return (
-      <Box top={0} left={0} position={'absolute'} width='100vw' height='100vh' sx={{backgroundColor:'#cccccc'}}>
-      {!sidebar&&<Box sx={{cursor:'pointer',position:'absolute',top:'5.2vh',left:'1.2vw'}} fontSize='large' onClick={()=>setsidebar(!sidebar)}>
+import React,{Fragment,FC,PropsWithChildren} from 'react'
+import DashboardSideBar from './Sidebar'
+import {Box,styled} from '@mui/material'
+import { Outlet } from "react-router-dom";
+import DashboardNavbar from './Navbar'
+import SearchProduct from './SearchProduct';
+const Wrapper:FC = styled(Box)(({ theme }:any) => ({
+    width: `calc(100% - 80px)`,
+    maxWidth: 1200,
+    margin: "auto",
+    paddingLeft: 80,
+    [theme.breakpoints.down("md")]: {
+      width: "100%",
+      marginLeft: 0,
+      paddingLeft: "2rem",
+      paddingRight: "2rem",
+    },
+  }));
+  
+const Dashboard:FC<PropsWithChildren> = ({children}) => {
+    const Wrapper = styled(Box)(({ theme }:any) => ({
+        // width: `calc(100% - 80)`,
+        width:'94.1vw',
+        position:'absolute',
+        top:'0',
+        height:'100%',
+        // maxWidth: 1200,
+        backgroundColor:'#f3f4f9',
+        
+        paddingLeft: 80,
+        [theme.breakpoints.down("md")]: {
+          width: "100%",
+          marginLeft: 0,
+          paddingLeft: "2rem",
+          paddingRight: "2rem",
+        },
+      }));
       
-            <ToggleIcon />
-            <ToggleIcon />
-            <ToggleIcon />
-          </Box>}
-      {sidebar&&<Sidebar sidebar={sidebar} setsidebar={setsidebar}/>}
-      <Welcome/>
-      </Box>
+  return (
+    <Fragment>
+      <DashboardSideBar/>
+       <Wrapper>
+        <DashboardNavbar/>
+        <SearchProduct/>
+        {children || <Outlet />}
+       </Wrapper>
+    </Fragment>
   )
 }
 

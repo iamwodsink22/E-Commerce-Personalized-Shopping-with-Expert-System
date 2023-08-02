@@ -9,6 +9,7 @@ import * as Yup from 'yup'
 import {useState} from 'react'
 import { Theme } from "@emotion/react"
 import { toast } from "react-hot-toast"
+import useAuth from "hooks/useAuth"
 
 
 export const TextFieldWrapper = styled(Box)(({ theme }:any) => ({
@@ -35,11 +36,14 @@ const validationSchema = Yup.object().shape({
 const Login = () => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const { login } = useAuth();
     let navigate = useNavigate();
 const submitForm=()=>{
 setLoading(true)
+login(values.email,values.password)
 toast.success("Logged-in Successfully")
-navigate('/dashboard')
+navigate('/home')
+setLoading(false)
 }    
   const { errors, values, touched, handleBlur, handleChange, handleSubmit }=useFormik({
     initialValues:{
@@ -68,7 +72,7 @@ navigate('/dashboard')
           mb={5}
         >
           <Box width={38} mb={1}>
-            <img src="pop.jpg" width="100%" alt="Logo" />
+            <img src="/static/pop.jpg" width="100%" alt="Logo" />
           </Box>
           <Typography variant='h1' fontSize={24} fontWeight={700}>
             Login In to E-Commerce

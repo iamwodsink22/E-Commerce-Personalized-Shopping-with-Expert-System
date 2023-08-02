@@ -8,9 +8,9 @@ const Welcome = () => {
     <Box position={'absolute'} top={-2} left={'10vw'}>
         <nav style={{display:'flex',justifyContent:'space-between',alignItems:'center',paddingTop:'1.5rem',paddingBottom:'1.5rem'}} >
         <div>
-          <Shop2OutlinedIcon sx={{mt:'1vh'}} />
+          <img src='newpop.png' alt='photu' style={{marginTop:'1vh',width:'5vw'}} />
         </div>
-        <ul style={{ position:'relative',right:'30vw',display:'flex',justifyContent:'center',alignItems:'center',listStyleType:'none'}}>
+        <ul style={{ position:'relative',right:'35vw',display:'flex',justifyContent:'center',alignItems:'center',listStyleType:'none'}}>
           
             <li style={{margin:'0 5vw'}}>
               <Link style={{textDecoration:'none',color:'white',fontFamily:'"Poppins",sans-serif'}} to="/sell">Start Selling</Link>
@@ -18,8 +18,8 @@ const Welcome = () => {
          
             <li style={{margin:'0 3vw'}}>
               <button style={{color:'#fff',borderRadius: '10vh',
-  backgroundColor: '#2c2d2d',width:'5vw',height:'4vh'}}>
-                <Link style={{textDecoration:'none',color:'white',fontFamily:'"Poppins",sans-serif'}} to="/cart">My Cart</Link>
+  backgroundColor: '#2c2d2d',width:'6vw',height:'4vh'}}>
+                <Link style={{textDecoration:'none',color:'white',fontFamily:'"Poppins",sans-serif'}} to="/shop">Shop</Link>
               </button>
             </li>
           

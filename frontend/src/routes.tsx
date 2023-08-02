@@ -1,7 +1,11 @@
 import { LazyExoticComponent,Suspense,FC,lazy } from "react";
 import LoadingScreen from "./components/LoadingScreen";
-import Register from "pages/Register";
+import AuthGuard from "utils/AuthGuard";
 import Dashboard from "pages/Dashboard";
+
+
+
+
 const Loadable = (Component:LazyExoticComponent<FC>) => (props:any) =>
   (
     <Suspense fallback={<LoadingScreen />}>
@@ -9,17 +13,38 @@ const Loadable = (Component:LazyExoticComponent<FC>) => (props:any) =>
     </Suspense>
   );
   const Login = Loadable(lazy(() => import("./pages/Login")));
+  const Register = Loadable(lazy(() => import("./pages/Register")));
+  
+  const Home = Loadable(lazy(() => import("./pages/Home")));
+  const Shop = Loadable(lazy(() => import("./pages/Shop")));
+  const ViewProduct=Loadable(lazy(() => import("./pages/ViewProduct")));
   const routes = [
     {
       path: "/",
       element: (
         <Login />
        ),
+    },
+    {
+      path:"login",
+      element:<Login/>
     },{
-      path:'/register',
+      path:'register',
       element:(<Register/>)
     },{
-      path:'/dashboard',
-      element:<Dashboard/>
+      path:"home",
+      element:(<AuthGuard><Home/></AuthGuard>)
+    },{
+      path: "shop",
+      element:(<AuthGuard><Dashboard/></AuthGuard>),
+      children:[{
+       path: "",
+       element: <Shop/>
+      },
+    {
+      path:"view-product",
+      element:<ViewProduct/>
     }]
+    }
+    ]
 export default routes
