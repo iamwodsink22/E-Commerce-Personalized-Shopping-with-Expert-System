@@ -69,7 +69,7 @@ const ViewProduct:FC = () => {
             
              
         <FlexBox key={index} mt="5vh" >
-          <img src={`/static/${product.image}`} alt="Men Keds" width="90px" />
+          <img src={product.image} alt="Men Keds" width="90px" />
 
           <Box display="flex" flexDirection={'column'} ml="1rem" mr='2vw'>
             <Small>{product.title}</Small>

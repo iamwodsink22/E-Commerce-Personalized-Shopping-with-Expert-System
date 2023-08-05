@@ -6,7 +6,7 @@ import PersonIcon from '@mui/icons-material/Person';
 export const sidebarItems=[{
     name:'Browse Products',
     icon:ShopIcon,
-    url:'/shop'
+    url:'shop'
 },{
     name:'Cart',
     icon:ShoppingCartIcon,
@@ -20,7 +20,7 @@ export const sidebarItems=[{
     icon:HistoryIcon,
     url:'/history'
 },{
-    name:'User',
+    name:'User Profile',
     icon:PersonIcon,
-    url:'/user'
+    url:'user'
 }]

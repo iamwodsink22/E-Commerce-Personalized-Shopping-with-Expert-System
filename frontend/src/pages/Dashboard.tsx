@@ -41,7 +41,7 @@ const Dashboard:FC<PropsWithChildren> = ({children}) => {
       <DashboardSideBar/>
        <Wrapper>
         <DashboardNavbar/>
-        <SearchProduct/>
+        
         {children || <Outlet />}
        </Wrapper>
     </Fragment>

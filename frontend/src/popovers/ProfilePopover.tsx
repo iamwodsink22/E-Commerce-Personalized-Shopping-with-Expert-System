@@ -65,7 +65,7 @@ const ProfilePopover: FC = () => {
         title={
           <FlexBox alignItems="center">
             <UkoAvatar
-              src={user?.avatar || "/static/avatar/001-man.svg"}
+              src={`/static/${user?.avatar}` || "/static/avatar/001-man.svg"}
               sx={{ width: 35, height: 35 }}
             />
 

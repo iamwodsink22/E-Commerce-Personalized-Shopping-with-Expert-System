@@ -50,7 +50,7 @@ const DashboardSideBar: FC = (
 
 
   const handleActiveMainMenu = (menuItem: any) => () => {
-    setActive(menuItem.title);
+    setActive(menuItem.name);
 
     navigate(menuItem.url);
    

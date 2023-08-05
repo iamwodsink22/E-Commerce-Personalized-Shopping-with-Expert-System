@@ -34,7 +34,7 @@ const Shop:FC = () => {
     useTitle("Browse Products")
   return (
     <StyledProductWrapper>
-      
+      <SearchProduct/>
       <Recommended/>
       <Popular/>
       {/* <Fashion/> */}

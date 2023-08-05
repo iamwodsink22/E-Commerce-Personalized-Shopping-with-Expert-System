@@ -19,7 +19,7 @@ const Welcome = () => {
             <li style={{margin:'0 3vw'}}>
               <button style={{color:'#fff',borderRadius: '10vh',
   backgroundColor: '#2c2d2d',width:'6vw',height:'4vh'}}>
-                <Link style={{textDecoration:'none',color:'white',fontFamily:'"Poppins",sans-serif'}} to="/shop">Shop</Link>
+                <Link style={{textDecoration:'none',color:'white',fontFamily:'"Poppins",sans-serif'}} to="/dashboard">Dashboard</Link>
               </button>
             </li>
           
