@@ -28,7 +28,9 @@ export const StyledProductWrapper=styled(Box)(()=>({
   fontFamily: "'Philosopher', sans-serif",
   justifyContent:'center',
   padding:'0.5vw',
-  color:'white'
+  // backgroundImage:"url('/static/back.jfif')",
+  color:'white',
+  height:'88vh'
 }))
 const Shop:FC = () => {
     useTitle("Browse Products")

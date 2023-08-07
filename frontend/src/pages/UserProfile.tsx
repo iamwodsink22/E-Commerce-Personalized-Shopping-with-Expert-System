@@ -68,7 +68,7 @@ const AddNewUser: FC = () => {
     city: user!=null&&user.city?user.city:"",
     address: user!=null&&user.address?user.address:'',
     zip: user!=null&&user.zip?user.zip:"",
-    about: user!=null&&user.about?user.bio:"",
+    about: user!=null&&user.bio?user.bio:"",
   };
 
   const validationSchema = Yup.object().shape({

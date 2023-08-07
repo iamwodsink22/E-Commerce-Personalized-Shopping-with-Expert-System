@@ -16,7 +16,7 @@ import { productList } from './ProductList'
 
 const ViewProductWrapper=styled(Box)(()=>({
     display:'flex',
-    marginTop:'5vh',
+    marginTop:'2vh',
     justifyContent:'center',
     textAlign:'center',
     width:'75vw',
@@ -26,13 +26,17 @@ const ViewProductWrapper=styled(Box)(()=>({
 
 const ViewProduct:FC = () => {
     useTitle("View Product")
+    const handleCart=()=>{
+
+    }
   return (
+    <>
     <ViewProductWrapper>
     <Box mr='4vw' marginTop={'auto'} marginBottom={'auto'}>
         <img style={{width:'16vw'}} src='/static/products/camera.png' placeholder='imgs' alt='imgs'/>
     </Box>
     <Card sx={{display:'block',padding:'2vh',height:'60vh',marginRight:'5vw', borderRadius:'3vh'}}>
-        <H1 color={(theme)=>theme.palette.primary.main}>Apple Light</H1>
+        <H1 color={(theme)=>theme.palette.primary.main}>Company : Apple</H1>
         <Box textAlign={'left'} mt='1vw'>
 
         <Typography color={(theme)=>theme.palette.primary.main}>Company : Apple</Typography>
@@ -53,8 +57,8 @@ const ViewProduct:FC = () => {
         <Typography>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit ea placeat, maiores doloremque, quis nulla porro iure provident consequatur ullam impedit! Odit, magnam? Porro perferendis, vitae a corrupti magnam nisi?</Typography>
         <Box mt={'10vh'} p='0.5vw' sx={{color:'white'}}>
 
-        <Button sx={{backgroundColor:'black',mr:'1vw'}}><AddShoppingCartIcon fontSize='small' sx={{float:'left'}}/> Add to Cart</Button>
-        <Button sx={{backgroundColor:'skyblue'}}><CreditCardIcon fontSize='small'/> Order Now</Button>
+        <Button sx={{backgroundColor:'black',mr:'1vw',cursor:'pointer'}} onClick={handleCart}><AddShoppingCartIcon fontSize='small' sx={{float:'left'}}/> Add to Cart</Button>
+        <Button sx={{backgroundColor:'skyblue',cursor:'pointer'}}><CreditCardIcon fontSize='small'/> Order Now</Button>
         </Box>
 
     </Card>
@@ -65,10 +69,10 @@ const ViewProduct:FC = () => {
 
         {productList.slice(0,4).map((product, index) => (
             
-           
-            
-             
-        <FlexBox key={index} mt="5vh" >
+          
+          
+          
+          <FlexBox key={index} mt="5vh" >
           <img src={product.image} alt="Men Keds" width="90px" />
 
           <Box display="flex" flexDirection={'column'} ml="1rem" mr='2vw'>
@@ -92,6 +96,42 @@ const ViewProduct:FC = () => {
     </Card>
     
     </ViewProductWrapper>
+       <Box marginLeft='10vw' mt='-2vh'>
+        <H3>More from Apple</H3>
+    <Card sx={{ height: "30%",width:'60vw',borderRadius:'3vh',display:'flex' }}>
+       
+      
+
+        {productList.slice(0,4).map((product, index) => (
+          
+          
+          
+          
+          <FlexBox key={index} mt="5vh" >
+          <img src={product.image} alt="Men Keds" width="90px" />
+
+          <Box display="flex" flexDirection={'column'} ml="1rem" mr='2vw'>
+            <Small>{product.title}</Small>
+            <Rating
+              name="read-only"
+              size="small"
+              defaultValue={product.rating}
+              readOnly
+              sx={{ my: "3px" }}
+              />
+            <Small fontWeight={600}>${product.price}</Small>
+          </Box>
+        </FlexBox>
+             
+             )
+             )}
+       
+      
+        
+    </Card>
+             </Box>
+
+      </>
   )
 }
 

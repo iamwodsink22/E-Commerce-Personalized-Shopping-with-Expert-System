@@ -59,7 +59,7 @@ const Recommended:FC = () => {
             
 
         
-        <FlexBox key={index} mt="3vh" ml='3vw' mr='1vw' onClick={()=>navigate('/dashboard/view-product')}>
+        <FlexBox key={index} mt="3vh" ml='3vw' mr='1vw' sx={{cursor:'pointer'}} onClick={()=>navigate('/dashboard/view-product')}>
           <img src={product.image} alt="Men Keds" width="90px" />
 
           <Box display="flex" flexDirection={'column'} ml="1rem" mr='2vw'>

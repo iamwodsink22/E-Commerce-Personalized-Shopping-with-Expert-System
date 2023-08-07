@@ -10,7 +10,7 @@ export const sidebarItems=[{
 },{
     name:'Cart',
     icon:ShoppingCartIcon,
-    url:'/cart'
+    url:'cart'
 },{
     name:'Sell',
     icon:SellIcon,

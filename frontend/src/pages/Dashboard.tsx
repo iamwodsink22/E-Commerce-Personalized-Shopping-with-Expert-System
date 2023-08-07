@@ -26,6 +26,7 @@ const Dashboard:FC<PropsWithChildren> = ({children}) => {
         height:'100%',
         // maxWidth: 1200,
         backgroundColor:'#f3f4f9',
+       
         
         paddingLeft: 80,
         [theme.breakpoints.down("md")]: {

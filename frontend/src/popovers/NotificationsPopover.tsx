@@ -16,7 +16,7 @@ const messages = [
     type: "",
     name: "Nike",
     message: "Added a new product Air Jordan 2019 Max",
-    image: "nike.jfif",
+    image: "/static/nike.jfif",
   },
   {
     id: "5e8883f7ed1486d665d8be1e",
@@ -26,7 +26,7 @@ const messages = [
     type: "",
     name: "Apple",
     message: "You might like the Popular Iphone 14",
-    image: "applelogo.png",
+    image: "/static/applelogo.png",
   },
   {
     id: "5e8883fca0e8612044248ecf",
@@ -36,7 +36,7 @@ const messages = [
     type: "item_shipped",
     name: "Adidas",
     message: "You will get your product soon",
-    image: "adidas.png",
+    image: "/static/adidas.png",
   },
 ];
 

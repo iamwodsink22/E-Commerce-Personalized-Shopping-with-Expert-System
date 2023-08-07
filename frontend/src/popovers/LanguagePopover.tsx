@@ -7,11 +7,11 @@ const languageOptions: {
   [key: string]: { icon: string; label: string };
 } = {
   en: {
-    icon: "usa.png",
+    icon: "/static/usa.png",
     label: "English",
   },
   es: {
-    icon: "spain.png",
+    icon: "/static/spain.png",
     label: "Spanish",
   },
   //   hi: {
