@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { Theme } from '@emotion/react'
 import { Box, styled,Rating } from '@mui/material'
 import FlexBox from 'components/FlexBox'
@@ -18,6 +18,7 @@ import { productList } from '../ProductList'
 import { H3 } from 'components/Typography'
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
+import ViewProduct from 'pages/ViewProduct'
 
 
 export const StyledProductWrapper=styled(Box)(()=>({
@@ -33,7 +34,18 @@ export const StyledProductWrapper=styled(Box)(()=>({
 }))
 
 const Recommended:FC = () => {
+  const initstate={
+    id:-1,
+    title:"",
+    image:"pop",
+    company:"",
+    price:0
+  }
   const navigate=useNavigate()
+  
+  const handleView=(id:number)=>{
+    navigate(`view-product/${id}`)
+  }
   return (
     <>
     <H3 sx={{color:'black'}}>Recommended Products</H3>
@@ -59,7 +71,8 @@ const Recommended:FC = () => {
             
 
         
-        <FlexBox key={index} mt="3vh" ml='3vw' mr='1vw' sx={{cursor:'pointer'}} onClick={()=>navigate('/dashboard/view-product')}>
+        <FlexBox key={index} mt="3vh" ml='3vw' mr='1vw' sx={{cursor:'pointer'}} onClick={()=>handleView(index)}>
+          
           <img src={product.image} alt="Men Keds" width="90px" />
 
           <Box display="flex" flexDirection={'column'} ml="1rem" mr='2vw'>
@@ -81,6 +94,7 @@ const Recommended:FC = () => {
       
         </Swiper>
     </Box>
+    {/* {view.id!==-1&&<ViewProduct product={view}/>} */}
       </>
   )
 }

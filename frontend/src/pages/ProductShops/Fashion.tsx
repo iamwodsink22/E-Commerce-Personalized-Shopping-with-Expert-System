@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Theme } from '@emotion/react'
 import { Box, styled,Rating } from '@mui/material'
 import FlexBox from 'components/FlexBox'
@@ -17,6 +17,7 @@ import {FC,Fragment} from 'react'
 import { productList } from '../ProductList'
 import { H3 } from 'components/Typography'
 import { useNavigate } from 'react-router'
+import ViewProduct from 'pages/ViewProduct'
 
 
 export const StyledProductWrapper=styled(Box)(()=>({
@@ -32,7 +33,12 @@ export const StyledProductWrapper=styled(Box)(()=>({
 }))
 
 const Fashion:FC = () => {
+  const [view,setview]=useState(-1)
   const navigate=useNavigate()
+  const handleView=(id:number)=>{
+    setview(id)
+  }
+  console.log(view)
   return (
     <>
     <H3 sx={{color:'black'}}>Fashion Products</H3>
@@ -58,7 +64,8 @@ const Fashion:FC = () => {
             <SwiperSlide>
             
 
-        <FlexBox key={index} mt="3vh" ml='3vw' mr='1vw' sx={{cursor:'pointer'}} onClick={()=>navigate('/dashboard/view-product')} >
+        <FlexBox key={index} mt="3vh" ml='3vw' mr='1vw' sx={{cursor:'pointer'}} onClick={()=>handleView(index)} >
+        {/* {view!==-1&&<ViewProduct product={product}/>} */}
           <img src={product.image} alt="Men Keds" width="90px" />
 
           <Box display="flex" flexDirection={'column'} ml="1rem" mr='2vw'>
@@ -79,6 +86,7 @@ const Fashion:FC = () => {
       
         </Swiper>
     </Box>
+   
       </>
   )
 }

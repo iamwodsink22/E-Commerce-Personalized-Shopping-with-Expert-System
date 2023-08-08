@@ -57,7 +57,22 @@ const cartSlice=createSlice({
         
     },
     extraReducers:(builder)=>{
-        builder.addCase(getCart.pending, (state, action) => {
+        builder.addCase(Add2Cart.pending, (state, action) => {
+            state.isloading = true;
+          })
+          .addCase(Add2Cart.fulfilled, (state, action) => {
+            state.isloading = false;
+            
+            console.log(action.payload);
+            
+          })
+          .addCase(Add2Cart.rejected, (state, action) => {
+            state.isloading = false;
+            
+            console.log(action.payload);
+    
+           
+          }).addCase(getCart.pending, (state, action) => {
             state.isloading = true;
           })
           .addCase(getCart.fulfilled, (state, action) => {

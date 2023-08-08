@@ -23,6 +23,9 @@ import { useNavigate } from 'react-router'
 
 const Tech:FC = () => {
   const navigate=useNavigate()
+  const handleView=(id:number)=>{
+    navigate(`view-product/${id}`)
+  }
   return (
     <>
     <H3 sx={{color:'black'}}>Tech Products</H3>
@@ -47,7 +50,7 @@ const Tech:FC = () => {
           <SwiperSlide>
             
 
-            <FlexBox key={index} mt="3vh" ml='3vw' mr='1vw' sx={{cursor:'pointer'}} onClick={()=>navigate('/dashboard/view-product')} >
+            <FlexBox key={index} mt="3vh" ml='3vw' mr='1vw' sx={{cursor:'pointer'}} onClick={()=>handleView(index)} >
           <img src={product.image} alt="Men Keds" width="90px" />
 
           <Box display="flex" flexDirection={'column'} ml="1rem" mr='2vw'>

@@ -44,13 +44,20 @@ const Loadable = (Component:LazyExoticComponent<FC>) => (props:any) =>
        element: <Shop/>
       },{
         path: "shop",
-        element: <Shop/>
+        element: <Shop/>,
+        
+          
         
        }
-    ,{
-      path:"view-product",
+    ,
+    {
+      path:'shop/view-product/:id',
       element:<ViewProduct/>
     },{
+      path:"view-product/:id",
+      element:<ViewProduct/>
+    }
+    ,{
       path:"user",
       element:<User/>
     },{

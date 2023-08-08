@@ -13,6 +13,10 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { productList } from './ProductList'
+import { useParams } from 'react-router';
+import { TypeSpecimenOutlined } from '@mui/icons-material';
+import { useDispatch } from 'react-redux';
+import { ADD_CART, Add2Cart } from 'redux/cartReducer';
 
 const ViewProductWrapper=styled(Box)(()=>({
     display:'flex',
@@ -25,25 +29,30 @@ const ViewProductWrapper=styled(Box)(()=>({
 }))
 
 const ViewProduct:FC = () => {
+  const dispatch=useDispatch<any>()
+  const {id}:any=useParams()
+  console.log(typeof(id))
+  var newid=parseInt(id)
+  const product=productList[newid]
     useTitle("View Product")
     const handleCart=()=>{
-
+    dispatch(Add2Cart(product))
     }
   return (
     <>
     <ViewProductWrapper>
     <Box mr='4vw' marginTop={'auto'} marginBottom={'auto'}>
-        <img style={{width:'16vw'}} src='/static/products/camera.png' placeholder='imgs' alt='imgs'/>
+        <img style={{width:'16vw'}} src={product.image} placeholder='imgs' alt='imgs'/>
     </Box>
     <Card sx={{display:'block',padding:'2vh',height:'60vh',marginRight:'5vw', borderRadius:'3vh'}}>
-        <H1 color={(theme)=>theme.palette.primary.main}>Company : Apple</H1>
+        <H1 color={(theme)=>theme.palette.primary.main}>{product.title}</H1>
         <Box textAlign={'left'} mt='1vw'>
 
-        <Typography color={(theme)=>theme.palette.primary.main}>Company : Apple</Typography>
-        <Typography mt={'1vw'} color={(theme)=>theme.palette.primary.main}>Price: $900</Typography>
+        <Typography color={(theme)=>theme.palette.primary.main}>Company : {product.company}</Typography>
+        <Typography mt={'1vw'} color={(theme)=>theme.palette.primary.main}>Price: ${product.price}</Typography>
         </Box>
         <Box display={'flex'} mt={'1vw'}>
-            <Typography color={(theme)=>theme.palette.primary.main}>Rating:</Typography>
+            <Typography color={(theme)=>theme.palette.primary.main}>Rating</Typography>
         <Rating
               name="read-only"
               size="small"
@@ -51,7 +60,7 @@ const ViewProduct:FC = () => {
               readOnly
               sx={{ my: "3px" }}
               />
-              <Typography ml='1vw'>4.5/5</Typography>
+              <Typography ml='1vw'>{product.rating}</Typography>
         </Box>
         <Typography mt={'2vw'} color={(theme)=>theme.palette.primary.main}>Description:</Typography>
         <Typography>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit ea placeat, maiores doloremque, quis nulla porro iure provident consequatur ullam impedit! Odit, magnam? Porro perferendis, vitae a corrupti magnam nisi?</Typography>
@@ -67,24 +76,24 @@ const ViewProduct:FC = () => {
        
       
 
-        {productList.slice(0,4).map((product, index) => (
+        {productList.slice(0,4).map((produc, index) => (
             
           
           
           
           <FlexBox key={index} mt="5vh" >
-          <img src={product.image} alt="Men Keds" width="90px" />
+          <img src={produc.image} alt="Men Keds" width="90px" />
 
           <Box display="flex" flexDirection={'column'} ml="1rem" mr='2vw'>
-            <Small>{product.title}</Small>
+            <Small>{produc.title}</Small>
             <Rating
               name="read-only"
               size="small"
-              defaultValue={product.rating}
+              defaultValue={produc.rating}
               readOnly
               sx={{ my: "3px" }}
               />
-            <Small fontWeight={600}>${product.price}</Small>
+            <Small fontWeight={600}>${produc.price}</Small>
           </Box>
         </FlexBox>
              

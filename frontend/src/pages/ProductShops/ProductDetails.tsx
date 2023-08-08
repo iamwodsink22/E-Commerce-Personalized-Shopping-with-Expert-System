@@ -11,10 +11,10 @@ const ProductDetails:FC<ProductProps> = ({product}) => {
     <Card sx={{pl:'2vw',mb:'1vh'}}>
     <Product>
               <ProductDetail>
-                <img style={{width:'80px',height:'80px', marginTop:'2vh'}} src={product.img} alt="hello" />
+                <img style={{width:'80px',height:'80px', marginTop:'2vh'}} src={product.image} alt="hello" />
                 <Details>
                   <Span >
-                    <b>Product:</b> {product.name}
+                    <b>Product:</b> {product.title}
                   </Span>
                   <Span>
                     <b>ID:</b> {product.id}
@@ -28,10 +28,10 @@ const ProductDetails:FC<ProductProps> = ({product}) => {
               <PriceDetail>
                 <ProductAmountContainer>
                   <Add />
-                  <ProductAmount>${product.amount}</ProductAmount>
+                  <ProductAmount>${product.price}</ProductAmount>
                   <Remove />
                 </ProductAmountContainer>
-                <ProductPrice>${product.total}</ProductPrice>
+                <ProductPrice>${product.price}</ProductPrice>
               </PriceDetail>
             </Product>
             </Card>
