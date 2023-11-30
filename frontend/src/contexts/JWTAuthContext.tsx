@@ -1,7 +1,11 @@
 import LoadingScreen from "components/LoadingScreen";
 import jwtDecode from "jwt-decode";
 import { createContext, ReactNode, useEffect, useReducer } from "react";
+import { useDispatch } from "react-redux";
+import { UPDATE_USER } from "redux/userReducer";
 import axios from "utils/axios";
+
+
 
 // All types
 // =============================================
@@ -120,20 +124,25 @@ type AuthProviderProps = {
 };
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
+  
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const login = async (email: string, password: string) => {
-  
+ 
     console.log(email)
-    const response = await axios.post("/auth/token", {
+    const response = await axios.post("/auth/login", {
       email,
       password,
     });
+    
     //@ts-ignore
-    const { access_token, user } = response.data;
-    console.log(access_token,user)
+    const { accessToken, user } = response.data;
+    console.log(user.image.filePath)
+    localStorage.setItem('id',user._id)
+    localStorage.setItem('filePath',user.image.filePath)
+    console.log(accessToken,user)
 
-    setSession(access_token);
+    setSession(accessToken);
     dispatch({
       type: Types.Login,
       payload: {
@@ -147,7 +156,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     full_name: string,
     password: string
   ) => {
-    const response = await axios.post("/users/register", {
+    const response = await axios.post("/auth/register", {
       email,
       full_name,
       password,
@@ -174,11 +183,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     (async () => {
       try {
         const accessToken = window.localStorage.getItem("accessToken");
+      
 
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
-
-          const response = await axios.get("/users/me");
+          const id=localStorage.getItem('id')
+          const response = await axios.get(`api/users/me/${id}`);
           //@ts-ignore
           const { user } = response.data;
 

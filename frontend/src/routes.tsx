@@ -51,7 +51,7 @@ const Loadable = (Component:LazyExoticComponent<FC>) => (props:any) =>
        }
     ,
     {
-      path:'shop/view-product/:id',
+      path:'dashboard/view-product/:id',
       element:<ViewProduct/>
     },{
       path:"view-product/:id",

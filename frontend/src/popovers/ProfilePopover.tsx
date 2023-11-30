@@ -7,6 +7,8 @@ import { FC, Fragment, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import PopoverLayout from "./PopoverLayout";
+import { useSelector } from "react-redux";
+import { selectUser } from "redux/userReducer";
 
 // styled components
 const StyledSmall = styled(Small)(({ theme }) => ({
@@ -21,6 +23,7 @@ const StyledSmall = styled(Small)(({ theme }) => ({
 
 const ProfilePopover: FC = () => {
   const anchorRef = useRef(null);
+  const current_user=useSelector(selectUser)
   const navigate = useNavigate();
   const { logout, user } = useAuth();
   const [open, setOpen] = useState(false);
@@ -49,7 +52,7 @@ const ProfilePopover: FC = () => {
           }}
         >
           <UkoAvatar
-            src={`/static/${user?.avatar}` || "/static/avatar/001-man.svg"}
+            src={current_user?current_user:"/static/avatar/001-man.svg"}
             sx={{ width: 35, height: 35, ml: 5 }}
           />
         </Badge>
@@ -65,7 +68,7 @@ const ProfilePopover: FC = () => {
         title={
           <FlexBox alignItems="center">
             <UkoAvatar
-              src={`/static/${user?.avatar}` || "/static/avatar/001-man.svg"}
+              src={current_user?current_user:"/static/avatar/001-man.svg"}
               sx={{ width: 35, height: 35 }}
             />
 

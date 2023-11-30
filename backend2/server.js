@@ -9,7 +9,8 @@ const JWT_VALIDITY = "7 days";
 var cartproducts = [
   {
     id: 1,
-    img: "https://th.bing.com/th/id/R.d213ca1ac5146636d7bb0ffda50cd3d3?rik=02lnXtrweQFIkg&riu=http%3a%2f%2fstatic.musiciansfriend.com%2fderivates%2f19%2f001%2f219%2f705%2fDV020_Jpg_Jumbo_421541.001_black_pair_V.jpg&ehk=hogZl1LZkMkz5Vts70F%2bmG0veGN8iIeNCdJegvCCxVk%3d&risl=&pid=ImgRaw&r=0",
+    image:
+      "https://th.bing.com/th/id/R.d213ca1ac5146636d7bb0ffda50cd3d3?rik=02lnXtrweQFIkg&riu=http%3a%2f%2fstatic.musiciansfriend.com%2fderivates%2f19%2f001%2f219%2f705%2fDV020_Jpg_Jumbo_421541.001_black_pair_V.jpg&ehk=hogZl1LZkMkz5Vts70F%2bmG0veGN8iIeNCdJegvCCxVk%3d&risl=&pid=ImgRaw&r=0",
     name: "Converse Styled",
     size: "43",
     color: "black",
@@ -18,7 +19,8 @@ var cartproducts = [
   },
   {
     id: 2,
-    img: "https://www.notebookcheck.net/fileadmin/Notebooks/Apple/iPad_Air_2022/DSC0960586.JPG",
+    image:
+      "https://www.notebookcheck.net/fileadmin/Notebooks/Apple/iPad_Air_2022/DSC0960586.JPG",
     name: "IPad Air 5",
     size: "-",
     color: "Silver",
@@ -90,7 +92,6 @@ app.get("/", (req, res) => {
   console.log("hey");
 });
 app.get("/api/v1/cart", async (req, res) => {
-  console.log("Get Cart");
   return res.status(201).json(cartproducts);
 });
 app.put("/api/v1/add2cart", async (req, res) => {

@@ -32,8 +32,12 @@ export const StyledProductWrapper=styled(Box)(()=>({
   backgroundColor:'#2c2d2d',
   color:'white'
 }))
-
-const Recommended:FC = () => {
+interface RecommendedProps{
+  products:any
+  title:String
+  colour:String
+}
+const Recommended:FC<RecommendedProps> = ({products,title,colour}:any) => {
   const initstate={
     id:-1,
     title:"",
@@ -48,8 +52,8 @@ const Recommended:FC = () => {
   }
   return (
     <>
-    <H3 sx={{color:'black'}}>Recommended Products</H3>
-    <Box mb={'8vh'} sx={{backgroundColor:'#2c2d2d',color:'white'}}>
+    <H3 sx={{color:'black'}}>{title}</H3>
+    <Box mb={'8vh'} sx={{backgroundColor:`${colour}`,color:'white'}}>
       
       <Swiper 
       // install Swiper modules
@@ -65,18 +69,18 @@ const Recommended:FC = () => {
       >
       
 
-        {productList.map((product, index) => (
+        {products.slice(0,5).map((product:any, index:any) => (
             
             <SwiperSlide>
             
 
         
-        <FlexBox key={index} mt="3vh" ml='3vw' mr='1vw' sx={{cursor:'pointer'}} onClick={()=>handleView(index)}>
+        <FlexBox key={index} mt="3vh" ml='3vw' mr='1vw' sx={{cursor:'pointer'}} onClick={()=>handleView(product.product_id)}>
           
-          <img src={product.image} alt="Men Keds" width="90px" />
+          <span style={{maxWidth:'100px',maxHeight:'100px'}}><img src={product.img_link} alt="Men Keds" width="90px" /></span>
 
           <Box display="flex" flexDirection={'column'} ml="1rem" mr='2vw'>
-            <Small>{product.title}</Small>
+            <Small>{product.brand}</Small>
             <Rating
               name="read-only"
               size="small"
@@ -84,7 +88,7 @@ const Recommended:FC = () => {
               readOnly
               sx={{ my: "3px" }}
               />
-            <Small fontWeight={600}>${product.price}</Small>
+            <Small fontWeight={600}>${product.discounted_price}</Small>
           </Box>
         </FlexBox>
               

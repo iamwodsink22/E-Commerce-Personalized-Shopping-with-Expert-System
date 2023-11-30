@@ -10,6 +10,7 @@ import {useState} from 'react'
 import { Theme } from "@emotion/react"
 import { toast } from "react-hot-toast"
 import useAuth from "hooks/useAuth"
+import axios from 'axios'
 
 
 export const TextFieldWrapper = styled(Box)(({ theme }:any) => ({
@@ -38,12 +39,15 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const { login } = useAuth();
     let navigate = useNavigate();
-const submitForm=()=>{
+async function submitForm(){
 setLoading(true)
 login(values.email,values.password)
 toast.success("Logged-in Successfully")
 navigate('/home')
 setLoading(false)
+// const x = await axios.get("/api/products/find/B07JW9H4J1");
+
+
 }    
   const { errors, values, touched, handleBlur, handleChange, handleSubmit }=useFormik({
     initialValues:{

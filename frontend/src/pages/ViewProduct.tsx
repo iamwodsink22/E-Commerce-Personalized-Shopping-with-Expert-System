@@ -1,6 +1,6 @@
 import { Box, Card, Typography, styled,Rating, Button } from '@mui/material'
 import { H1, H3, H4,Small } from 'components/Typography'
-import React,{FC, Fragment} from 'react'
+import React,{FC, Fragment,useEffect,useState} from 'react'
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import FlexBox from 'components/FlexBox';
@@ -13,43 +13,80 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { productList } from './ProductList'
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { TypeSpecimenOutlined } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
 import { ADD_CART, Add2Cart } from 'redux/cartReducer';
+import axios from 'axios';
 
 const ViewProductWrapper=styled(Box)(()=>({
     display:'flex',
     marginTop:'2vh',
     justifyContent:'center',
     textAlign:'center',
-    width:'75vw',
+    width:'85vw',
     marginLeft:'auto',
     marginRight:'auto'
 }))
 
 const ViewProduct:FC = () => {
+  const [product,setproduct]=useState(Object)
+  const[rec,setrec]=useState(Array)
+  const[pid,setpid]=useState(String)
+  
   const dispatch=useDispatch<any>()
   const {id}:any=useParams()
-  console.log(typeof(id))
-  var newid=parseInt(id)
-  const product=productList[newid]
+  
+  
+  const navigate=useNavigate()
+
+useEffect(()=>{
+ async function getProduct(){
+  
+  const response=await axios.get(`http://localhost:8000/api/products/find/${id}`)
+  const prd=response.data
+  
+  setproduct(prd)
+  
+  const recommendations=await axios.get(`http://127.0.0.1:4000/api/products/getitemrec/${id}`)
+  
+  
+  const {recs}=recommendations.data
+  
+
+  
+  
+  setrec(recs)
+  
+  
+  
+  
+  
+ }
+  getProduct()
+},[id])
     useTitle("View Product")
     const handleCart=()=>{
     dispatch(Add2Cart(product))
     }
+  
+    const handleView=(id:number)=>{
+      navigate(`/dashboard/view-product/${id}`)
+    } 
+  const rec_index=Math.floor(Math.random()*(rec.length-5))
   return (
     <>
     <ViewProductWrapper>
-    <Box mr='4vw' marginTop={'auto'} marginBottom={'auto'}>
-        <img style={{width:'16vw'}} src={product.image} placeholder='imgs' alt='imgs'/>
+    <Box mr='2vw' marginTop={'auto'} marginBottom={'auto'}>
+        <img style={{width:'16vw',height:'30vh'}} src={product.img_link} placeholder='imgs' alt='imgs'/>
     </Box>
-    <Card sx={{display:'block',padding:'2vh',height:'60vh',marginRight:'5vw', borderRadius:'3vh'}}>
-        <H1 color={(theme)=>theme.palette.primary.main}>{product.title}</H1>
+    <Card sx={{display:'block',padding:'2vh',maxHeight:'105vh',marginRight:'5vw', borderRadius:'3vh',maxWidth:'45vw'}}>
+        <H1 color={(theme)=>theme.palette.primary.main}>{product.product_name}</H1>
         <Box textAlign={'left'} mt='1vw'>
 
-        <Typography color={(theme)=>theme.palette.primary.main}>Company : {product.company}</Typography>
-        <Typography mt={'1vw'} color={(theme)=>theme.palette.primary.main}>Price: ${product.price}</Typography>
+        <Typography color={(theme)=>theme.palette.primary.main}>Company : {product.brand}</Typography>
+        <Typography mt={'1vw'} color={(theme)=>theme.palette.primary.main}>Actual Price: ${product.actual_price}</Typography>
+        <Typography mt={'1vw'} color={(theme)=>theme.palette.primary.main}>Discounted Price: ${product.discounted_price}</Typography>
         </Box>
         <Box display={'flex'} mt={'1vw'}>
             <Typography color={(theme)=>theme.palette.primary.main}>Rating</Typography>
@@ -63,29 +100,29 @@ const ViewProduct:FC = () => {
               <Typography ml='1vw'>{product.rating}</Typography>
         </Box>
         <Typography mt={'2vw'} color={(theme)=>theme.palette.primary.main}>Description:</Typography>
-        <Typography>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit ea placeat, maiores doloremque, quis nulla porro iure provident consequatur ullam impedit! Odit, magnam? Porro perferendis, vitae a corrupti magnam nisi?</Typography>
-        <Box mt={'10vh'} p='0.5vw' sx={{color:'white'}}>
+        <Typography>{product.about_product}</Typography>
+        <Box mt={'5vh'} p='0.5vw' sx={{color:'white'}}>
 
         <Button sx={{backgroundColor:'black',mr:'1vw',cursor:'pointer'}} onClick={handleCart}><AddShoppingCartIcon fontSize='small' sx={{float:'left'}}/> Add to Cart</Button>
         <Button sx={{backgroundColor:'skyblue',cursor:'pointer'}}><CreditCardIcon fontSize='small'/> Order Now</Button>
         </Box>
 
     </Card>
-    <Card sx={{ padding: "2rem", height: "100%",width:'37vw',borderRadius:'3vh' }}>
-        <H3>Similar Products</H3>
+    <Card sx={{ padding: "1rem", height: "100%",width:'50vw',borderRadius:'3vh' }}>
+        <H3>Our Recommendations</H3>
        
       
 
-        {productList.slice(0,4).map((produc, index) => (
+        {rec.slice(rec_index,rec_index+5).map((produc:any, index) => (
             
           
           
           
-          <FlexBox key={index} mt="5vh" >
-          <img src={produc.image} alt="Men Keds" width="90px" />
+          <FlexBox key={index} mt="5vh" onClick={()=>handleView(produc.product_id)} sx={{cursor:'pointer'}} >
+          <span style={{maxWidth:'85px',maxHeight:'40px'}}><img src={produc.img_link} alt="Men Keds"  width="80px" height='60px' /></span>
 
-          <Box display="flex" flexDirection={'column'} ml="1rem" mr='2vw'>
-            <Small>{produc.title}</Small>
+          <Box display="flex" flexDirection={'column'} ml="1rem" mr='1vw'>
+            <Small>{produc.brand}</Small>
             <Rating
               name="read-only"
               size="small"
@@ -93,7 +130,7 @@ const ViewProduct:FC = () => {
               readOnly
               sx={{ my: "3px" }}
               />
-            <Small fontWeight={600}>${produc.price}</Small>
+            <Small fontWeight={600}>${produc.discounted_price}</Small>
           </Box>
         </FlexBox>
              
@@ -105,7 +142,7 @@ const ViewProduct:FC = () => {
     </Card>
     
     </ViewProductWrapper>
-       <Box marginLeft='10vw' mt='-2vh'>
+       <Box marginLeft='10vw' mt='5vh'>
         <H3>More from Apple</H3>
     <Card sx={{ height: "30%",width:'60vw',borderRadius:'3vh',display:'flex' }}>
        

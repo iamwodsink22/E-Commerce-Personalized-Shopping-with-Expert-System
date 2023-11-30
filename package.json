@@ -5,9 +5,10 @@
   "main": "frontend/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "backend": "nodemon backend2/server.js",
+    "backend": "nodemon backend/index.js",
     "frontend": "npm start --prefix frontend",
-    "both": "concurrently \"npm run backend\" \"npm run frontend\" "
+    "recsys":"uvicorn backend.recsys.item_item:app --port 4000",
+    "all": "concurrently \"npm run backend\" \"npm run frontend\" \"npm run recsys\" "
   },
   "author": "",
   "license": "ISC",
