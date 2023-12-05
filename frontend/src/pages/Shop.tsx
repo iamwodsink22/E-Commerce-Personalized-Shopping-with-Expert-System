@@ -12,7 +12,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import useTitle from 'hooks/useTitle'
-import React,{FC,Fragment,useState} from 'react'
+import React,{FC,Fragment,useEffect,useState} from 'react'
 import SearchProduct from './SearchProduct';
 import { productList } from './ProductList'
 import { H3 } from 'components/Typography'
@@ -22,6 +22,8 @@ import Fashion from './ProductShops/Fashion';
 import Tech from './ProductShops/Tech';
 import Recommended from './ProductShops/Recommended';
 import axios from 'utils/axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { getElecProduct, getHomeProduct, getTechProduct, selectElecproduct, selectHomeproduct, selectTechproduct } from 'redux/productReducer';
 
 
 export const StyledProductWrapper=styled(Box)(()=>({
@@ -34,32 +36,30 @@ export const StyledProductWrapper=styled(Box)(()=>({
   height:'88vh'
 }))
 const Shop:FC = () => {
-  const [comp,setcomp]=useState([])
-  const [elect,setelect]=useState([])
-  const [home,sethome]=useState([])
-
-    useTitle("Browse Products")
-    async function getProducts(){
-    const compute=await axios.get('/products/getcategory',{params:{category:"Computers&Accessories'"}})
-    const computer=compute.data
-    setcomp(computer)
-    const electron=await axios.get('/products/getcategory',{params:{category:"Electronics'"}})
-    const electronics=electron.data
-    setelect(electronics)
-    const homes=await axios.get('/products/getcategory',{params:{category:"Home&Kitchen'"}})
-    const kitchen=homes.data
-    sethome(kitchen)
+  const dispatch=useDispatch<any>()
   
+useEffect(()=>{
+dispatch(getHomeProduct())
+dispatch(getTechProduct())
+dispatch(getElecProduct())
+console.log("Hello")
+},[])
+
+ 
+    useTitle("Browse Products")
+  
+  
+  const elecproducts:any=useSelector<any>(selectElecproduct)
+  const techproducts:any=useSelector<any>(selectTechproduct)
+  const homeproducts:any=useSelector<any>(selectHomeproduct)
     
-    
-    }
-  getProducts()
+  
   return (
     <StyledProductWrapper>
       <SearchProduct/>
-      <Recommended products={comp} title={'Computers and Accesories'} colour={'#2c2d2d'}/>
-      <Recommended products={home} title={'Home and Kitchen'} colour={'#cccccc'}/>
-      <Recommended products={elect} title={'Electronics and enterntaintment'} colour={'#ff4040'}/>
+      <Recommended products={techproducts} title={'Computers and Accesories'} colour={'#2c2d2d'}/>
+      <Recommended products={homeproducts} title={'Home and Kitchen'} colour={'#cccccc'}/>
+      <Recommended products={elecproducts} title={'Electronics and enterntaintment'} colour={'#ff4040'}/>
       {/* <Fashion/> */}
       {/* <Tech/> */}
     </StyledProductWrapper>

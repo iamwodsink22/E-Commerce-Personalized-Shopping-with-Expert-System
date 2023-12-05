@@ -15,9 +15,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { productList } from './ProductList'
 import { useNavigate, useParams } from 'react-router';
 import { TypeSpecimenOutlined } from '@mui/icons-material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ADD_CART, Add2Cart } from 'redux/cartReducer';
 import axios from 'axios';
+import { getProduct, getRecProduct, selectRecproduct, selectElecproduct, selectProduct } from 'redux/productReducer';
 
 const ViewProductWrapper=styled(Box)(()=>({
     display:'flex',
@@ -30,41 +31,23 @@ const ViewProductWrapper=styled(Box)(()=>({
 }))
 
 const ViewProduct:FC = () => {
-  const [product,setproduct]=useState(Object)
-  const[rec,setrec]=useState(Array)
-  const[pid,setpid]=useState(String)
+  // const [product,setproduct]=useState(Object)
+  // const[rec,setrec]=useState(Array)
+  // const[pid,setpid]=useState(String)
   
   const dispatch=useDispatch<any>()
+  const product=useSelector(selectProduct)
+  const rec=useSelector(selectRecproduct)
+  
   const {id}:any=useParams()
   
   
   const navigate=useNavigate()
 
 useEffect(()=>{
- async function getProduct(){
-  
-  const response=await axios.get(`http://localhost:8000/api/products/find/${id}`)
-  const prd=response.data
-  
-  setproduct(prd)
-  
-  const recommendations=await axios.get(`http://127.0.0.1:4000/api/products/getitemrec/${id}`)
-  
-  
-  const {recs}=recommendations.data
-  
-
-  
-  
-  setrec(recs)
-  
-  
-  
-  
-  
- }
-  getProduct()
-},[id])
+ dispatch(getProduct(id))
+ dispatch(getRecProduct(id))
+},[dispatch,id])
     useTitle("View Product")
     const handleCart=()=>{
     dispatch(Add2Cart(product))
@@ -74,6 +57,9 @@ useEffect(()=>{
       navigate(`/dashboard/view-product/${id}`)
     } 
   const rec_index=Math.floor(Math.random()*(rec.length-5))
+  console.log(rec)
+  const new_rec=rec.slice(rec_index,rec_index+5)
+  console.log(new_rec)
   return (
     <>
     <ViewProductWrapper>
@@ -113,7 +99,7 @@ useEffect(()=>{
        
       
 
-        {rec.slice(rec_index,rec_index+5).map((produc:any, index) => (
+        {new_rec.map((produc:any, index:number) => (
             
           
           

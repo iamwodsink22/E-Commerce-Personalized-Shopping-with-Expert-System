@@ -38,13 +38,8 @@ interface RecommendedProps{
   colour:String
 }
 const Recommended:FC<RecommendedProps> = ({products,title,colour}:any) => {
-  const initstate={
-    id:-1,
-    title:"",
-    image:"pop",
-    company:"",
-    price:0
-  }
+  
+  
   const navigate=useNavigate()
   
   const handleView=(id:number)=>{

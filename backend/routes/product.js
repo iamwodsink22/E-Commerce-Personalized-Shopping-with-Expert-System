@@ -62,7 +62,7 @@ router.get("/find/:id", async (req, res) => {
     console.log("Hello");
     console.log(`'${req.params.id}'`);
     const product = await Products.find({ product_id: req.params.id });
-    console.log(product);
+    
     res.status(200).json(product[0]);
   } catch (err) {
     res.status(500).json(err.message);

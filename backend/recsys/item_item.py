@@ -28,11 +28,12 @@ desc_data = pd.read_csv('C:/E-Commerce-Personalized-Shopping-with-Expert-System/
                         usecols=[0, 8])
 
 df_data=pd.read_csv('C:/E-Commerce-Personalized-Shopping-with-Expert-System/backend/amazon/amazon2.csv')
-true_k = 10
+true_k = 20
 cluster = []
 rec = []
 vectorizer = TfidfVectorizer(stop_words='english')
-X1 = vectorizer.fit_transform(desc_data['about_product'])
+X1 = vectorizer.fit_transform(df_data['product_name'])
+
 # kmeans=KMeans(n_clusters=10,init='k-means++')
 # y_kmeans=kmeans.fit_predict(X1)
 
@@ -43,20 +44,24 @@ X1 = vectorizer.fit_transform(desc_data['about_product'])
 
 def get_cluster(i):
 
-    for ind in order_centroids[i, :10]:
+    for ind in order_centroids[i, :20]:
 
         cluster.append(' %s' % terms[ind])
+        
+        
 
 
 model = KMeans(n_clusters=true_k, init='k-means++', max_iter=100, n_init=1)
 model.fit(X1)
-print("Top terms per cluster:")
+
+
 order_centroids = model.cluster_centers_.argsort()[:, ::-1]
 terms = vectorizer.get_feature_names_out()
 
 
 @app.get('/api/products/getitemrec/{id}')
-async def item2item_recommendations(id: str):
+def item2item_recommendations(id: str):
+    
 
     for i in range(len(df_data['product_id'])):
         if df_data['product_id'][i] == id:
@@ -64,17 +69,15 @@ async def item2item_recommendations(id: str):
 
     Y = vectorizer.transform([product])
     prediction = model.predict(Y)
-    # print(prediction)
+    
 
     get_cluster(prediction[0])
     for i in cluster:
-        for j in range(len(df_data['product_name'])):
-            if i in df_data['product_name'][j]:
-                if df_data['product_id'][j] != id:
-                    if df_data.iloc[j].to_dict() not in rec:
-
-                        rec.append(df_data.iloc[j].to_dict())
-    # print(len(rec))
-    # print(f"My rec{rec[:5]}")
-
+        for j in range(len(df_data['product_id'])):
+            if i in df_data['product_name'][j] and df_data['product_id'][j]!=id and df_data.iloc[j].to_dict not in rec:
+            
+                rec.append(df_data.iloc[j].to_dict())
+                        
+    
     return {'recs': rec}
+
