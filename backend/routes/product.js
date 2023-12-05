@@ -71,8 +71,7 @@ router.get("/find/:id", async (req, res) => {
 
 router.get("/getcategory", async (req, res) => {
   const qCategory = req.query.category;
-  console.log(qCategory);
-  console.log("My Categories");
+  
 
   try {
     let products;

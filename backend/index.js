@@ -33,6 +33,6 @@ app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoute);
-app.listen(process.env.PORT || 5000, () => {
-  console.log("Listening to port 5000");
+app.listen(process.env.PORT || 8000, () => {
+  console.log("Listening to port 8000");
 });

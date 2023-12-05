@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from data import df_data
 import os
-import tensorflow as tf
+
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.neighbors import NearestNeighbors
 from sklearn.cluster import KMeans
@@ -13,16 +13,16 @@ from fastapi import FastAPI
 
 from fastapi.middleware.cors import CORSMiddleware
 
-# app = FastAPI()
-# origins = ["*"]
+app = FastAPI()
+origins = ["*"]
 
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=origins,
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 os.chdir(r"C:/amazon")
 desc_data = pd.read_csv('../amazon/amazon.csv',
@@ -56,7 +56,7 @@ order_centroids = model.cluster_centers_.argsort()[:, ::-1]
 terms = vectorizer.get_feature_names_out()
 
 
-# @app.get('/api/products/getitemrec/{id}')
+@app.get('/api/products/getitemrec/{id}'):
 def item2item_recommendations(id: str):
     print(id)
     for i in range(len(df_data['product_id'])):

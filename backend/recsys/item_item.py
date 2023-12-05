@@ -1,9 +1,8 @@
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
-from data import df_data
+
 import os
-import tensorflow as tf
+
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.neighbors import NearestNeighbors
 from sklearn.cluster import KMeans
@@ -24,11 +23,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-os.chdir(r"C:/amazon")
-desc_data = pd.read_csv('amazon.csv',
+
+desc_data = pd.read_csv('C:/E-Commerce-Personalized-Shopping-with-Expert-System/backend/amazon/amazon.csv',
                         usecols=[0, 8])
 
-
+df_data=pd.read_csv('C:/E-Commerce-Personalized-Shopping-with-Expert-System/backend/amazon/amazon2.csv')
 true_k = 10
 cluster = []
 rec = []
