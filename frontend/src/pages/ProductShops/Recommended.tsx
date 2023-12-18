@@ -79,11 +79,11 @@ const Recommended:FC<RecommendedProps> = ({products,title,colour}:any) => {
             <Rating
               name="read-only"
               size="small"
-              defaultValue={product.rating}
+              defaultValue={product.ratings}
               readOnly
               sx={{ my: "3px" }}
               />
-            <Small fontWeight={600}>${product.discounted_price}</Small>
+            <Small fontWeight={600}>Rs {Math.ceil(product.discounted_price*120)}</Small>
           </Box>
         </FlexBox>
               

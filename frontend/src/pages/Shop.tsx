@@ -37,6 +37,7 @@ export const StyledProductWrapper=styled(Box)(()=>({
 }))
 const Shop:FC = () => {
   const dispatch=useDispatch<any>()
+  useTitle("Browse Products")
   
 useEffect(()=>{
 dispatch(getHomeProduct())
@@ -46,7 +47,7 @@ console.log("Hello")
 },[])
 
  
-    useTitle("Browse Products")
+
   
   
   const elecproducts:any=useSelector<any>(selectElecproduct)
@@ -57,9 +58,10 @@ console.log("Hello")
   return (
     <StyledProductWrapper>
       <SearchProduct/>
-      <Recommended products={techproducts} title={'Computers and Accesories'} colour={'#2c2d2d'}/>
-      <Recommended products={homeproducts} title={'Home and Kitchen'} colour={'#cccccc'}/>
-      <Recommended products={elecproducts} title={'Electronics and enterntaintment'} colour={'#ff4040'}/>
+      <Recommended products={techproducts} title={'Sports and Outdoors'} colour={'#2c2d2d'}/>
+      <Recommended products={homeproducts}
+       title={'Clothing, Shoes and Jewellery'} colour={'#cccccc'}/>
+      <Recommended products={elecproducts} title={'Toys and Games'} colour={'#ff4040'}/>
       {/* <Fashion/> */}
       {/* <Tech/> */}
     </StyledProductWrapper>

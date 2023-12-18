@@ -6,7 +6,8 @@ import axios from "axios";
 
 const initialState={
     loading:false,
-    recproducts:new Array(),
+    crecproducts:new Array(),
+    irecproducts:new Array(),
     techproducts:new Array(),
     homeproducts:new Array(),
     elecproducts:new Array(),
@@ -40,7 +41,9 @@ export const getRecProduct = createAsyncThunk(
         const res= await axios.get(`http://127.0.0.1:4000/api/products/getitemrec/${id}`)
         
        
-        return res.data.recs
+        const c_recs=res.data.rec
+        const i_recs=res.data.i_rec
+        return {c_recs,i_recs}
       } catch (error:any) {
         const message =
           (error.response &&
@@ -58,7 +61,7 @@ createAsyncThunk(
     async (_,thunkAPI:any) => {
       try {
         
-        const res=await axios.get('http://localhost:8000/api/products/getcategory',{params:{category:"Computers&Accessories'"}})
+        const res=await axios.get('http://localhost:8000/api/products/getcategory',{params:{category:"Sports & Outdoors "}})
         
         return res.data
       } catch (error:any) {
@@ -77,7 +80,7 @@ export const getElecProduct = createAsyncThunk(
     async (_, thunkAPI:any) => {
       try {
         
-        const res=await axios.get('http://localhost:8000/api/products/getcategory',{params:{category:"Electronics'"}})
+        const res=await axios.get('http://localhost:8000/api/products/getcategory',{params:{category:"Toys & Games "}})
        
         return res.data
       } catch (error:any) {
@@ -96,7 +99,7 @@ export const getHomeProduct = createAsyncThunk(
     async (_, thunkAPI:any) => {
       try {
        
-        const res=await axios.get('http://localhost:8000/api/products/getcategory',{params:{category:"Home&Kitchen'"}})
+        const res=await axios.get('http://localhost:8000/api/products/getcategory',{params:{category:"Clothing, Shoes & Jewelry "}})
         
         return res.data
       } catch (error:any) {
@@ -131,8 +134,10 @@ const productSlice=createSlice({name:"product",initialState,reducers:{
        
     })
     .addCase(getRecProduct.fulfilled,(state,action:any)=>{
+      const {c_recs,i_recs}=action.payload
         
-        state.recproducts=action.payload
+        state.crecproducts=c_recs
+        state.irecproducts=i_recs
         state.loading=false
     })
  .addCase(getHomeProduct.pending,(state,action:any)=>{
@@ -167,7 +172,8 @@ const productSlice=createSlice({name:"product",initialState,reducers:{
 export const { GETPRODUCT } =
   productSlice.actions;
 export const selectProduct = (state:any) => state.product.product;
-export const selectRecproduct = (state:any) => state.product.recproducts;
+export const selectCRecproduct = (state:any) => state.product.crecproducts;
+export const selectIRecproduct = (state:any) => state.product.irecproducts;
 export const selectTechproduct = (state:any) => state.product.techproducts;
 export const selectHomeproduct = (state:any) => state.product.homeproducts;
 export const selectElecproduct = (state:any) => state.product.elecproducts;

@@ -1,8 +1,7 @@
 import numpy as np
-import matplotlib.pyplot as plt
+
 import pandas as pd
 import os
-import tensorflow as tf
 import random
 os.chdir(r"C:/amazon")
 df_data = pd.read_csv('../amazon/amazon.csv',

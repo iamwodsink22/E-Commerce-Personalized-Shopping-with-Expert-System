@@ -8,6 +8,7 @@ const {
 
 const router = require("express").Router();
 
+
 router.post("/createproduct", async (req, res) => {
   console.log(req.body.category);
   x = req.body.category;
@@ -71,20 +72,21 @@ router.get("/find/:id", async (req, res) => {
 
 router.get("/getcategory", async (req, res) => {
   const qCategory = req.query.category;
+  console.log(qCategory)
   
 
   try {
     let products;
     if (qCategory) {
       products = await Products.find({
-        category: {
+        categories: {
           $in: [qCategory],
         },
       });
     } else {
       products = await Products.find();
     }
-
+    
     return res.status(200).json(products);
   } catch (error) {
     return res.status(500).json(error);

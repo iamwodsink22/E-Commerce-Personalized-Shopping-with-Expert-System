@@ -1,14 +1,15 @@
-import tensorflow as tf
+
 import pandas as pd
 import numpy as np
 import pickle
 import sklearn
 from sklearn.decomposition import TruncatedSVD
 
-NEW_RATE = pd.read_csv('../amazon/ratings.csv')
+NEW_RATE = pd.read_csv('C:/E-Commerce-Personalized-Shopping-with-Expert-System/backend/amazon/ratings.csv')
 
 pivot_table = NEW_RATE.pivot_table(
     values='rating', index='user_id', columns='product_id', fill_value=0)
+print(pivot_table.shape)
 
 X = pivot_table.T
 
@@ -25,7 +26,7 @@ product_names = list(X.index)
 
 def Collaborative_Filtering(i):
     cor_mat = pickle.load(open(
-        './res/corelation_mat.pkl', 'rb'))
+        'C:/E-Commerce-Personalized-Shopping-with-Expert-System/backend/recsys/res/corelation_mat.pkl', 'rb'))
     product_id = product_names.index(i)
     print(product_id)
 

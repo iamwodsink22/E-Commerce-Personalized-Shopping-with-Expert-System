@@ -188,7 +188,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
           const id=localStorage.getItem('id')
-          const response = await axios.get(`api/users/me/${id}`);
+          const response = await axios.get(`/users/me/${id}`);
           //@ts-ignore
           const { user } = response.data;
 

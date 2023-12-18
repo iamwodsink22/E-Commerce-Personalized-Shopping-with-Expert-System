@@ -23,7 +23,7 @@ const Dashboard:FC<PropsWithChildren> = ({children}) => {
         width:'94.1vw',
         position:'absolute',
         top:'0',
-        height:'100%',
+        height:'120%',
         // maxWidth: 1200,
         backgroundColor:'#f3f4f9',
        

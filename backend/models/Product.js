@@ -5,12 +5,11 @@ const productSchema = new mongoose.Schema(
     product_id: { type: String },
     product_name: { type: String, default: "" },
     brand: { type: String, default: "" },
-    category: { type: Array, default: [] },
+    categories: { type: Array, default: [] },
     discounted_price: { type: String, default: "" },
-    actual_price: { type: String, default: "" },
-    rating: { type: Number, default: 0 },
-    rating_count: { type: Number, default: 0 },
-    discount_percentage: { type: String, default: "" },
+    
+    ratings: { type: Number, default: 0 },
+    
     about_product: { type: String, default: "" },
     img_link: { type: String, default: "0" },
   },

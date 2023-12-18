@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const authRoute = require("./routes/auth.js");
 const productRoute = require("./routes/product.js");
 const userRoute = require("./routes/user.js");
+const paymentRoute = require("./routes/payment.js");
 const loading_into_db = require("./utils/loading_into_db");
 const cors = require("cors");
 const bp = require("body-parser");
@@ -24,6 +25,7 @@ mongoose
     console.log("Error Connecting To DB");
     console.log(error);
   });
+  
 app.use("../uploads", express.static(path.join(__dirname, "uploads")));
 app.use(cors());
 app.use(bp.json());
@@ -33,6 +35,8 @@ app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoute);
+app.use("/api/payment", paymentRoute);
+
 app.listen(process.env.PORT || 8000, () => {
   console.log("Listening to port 8000");
 });
