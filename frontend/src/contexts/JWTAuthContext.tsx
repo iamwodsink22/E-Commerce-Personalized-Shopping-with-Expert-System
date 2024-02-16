@@ -140,6 +140,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     console.log(user)
     
     localStorage.setItem('id',user._id)
+    localStorage.setItem('accessToken',accessToken)
     if(user.image){
     localStorage.setItem('filePath',user.image.filePath)
     }
@@ -181,6 +182,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const logout = () => {
     localStorage.removeItem('filePath')
+    localStorage.removeItem('accessToken')
     setSession(null);
     dispatch({ type: Types.Logout });
   };

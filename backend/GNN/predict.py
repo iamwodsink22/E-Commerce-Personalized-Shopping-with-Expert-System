@@ -8,7 +8,7 @@ from sklearn.neighbors import NearestNeighbors
 from scipy.sparse import csr_matrix
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sentence_transformer import SentenceTransformer,mean_pooling,my_model,tokenizer
+from backend.GNN.sentence_transformer import SentenceTransformer,mean_pooling,my_model,tokenizer
 import numpy as np
 sentence_transformer=SentenceTransformer(my_model)
 sentence_transformer.load_weights('D:/E-Commerce-Personalized-Shopping-with-Expert-System-master/E-Commerce-Personalized-Shopping-with-Expert-System-master/backend/GNN/sent/weights')

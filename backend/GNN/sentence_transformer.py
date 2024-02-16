@@ -59,8 +59,7 @@ class SentenceTransformer(Model):
 def mean_pooling(model_output,attention_mask):
         token_embeddings=model_output[0]
         input_mask_expanded=tf.cast(tf.broadcast_to(tf.expand_dims(attention_mask,axis=-1),tf.shape(token_embeddings)),tf.float32)
-        print(token_embeddings.shape)
-        print(input_mask_expanded.shape)
+        
         return tf.math.reduce_sum(token_embeddings*input_mask_expanded,axis=1)/tf.clip_by_value(tf.math.reduce_sum(input_mask_expanded,axis=1),1e-9,tf.float32.max)
 
 # sentence_transformer.compile(optimizer=keras.optimizers.Adam(2e-5),loss=keras.losses.BinaryCrossentropy())

@@ -6,7 +6,7 @@ const productRoute = require("./routes/product.js");
 const userRoute = require("./routes/user.js");
 const paymentRoute = require("./routes/payment.js");
 const cartRoute=require("./routes/cart.js")
-const loading_into_db = require("./utils/loading_into_db");
+
 const cors = require("cors");
 const bp = require("body-parser");
 const path = require("path");
@@ -20,7 +20,6 @@ mongoose
   )
   .then(() => {
     console.log("Connection To DB successful");
-    // loading_into_db();
   })
   .catch((error) => {
     console.log("Error Connecting To DB");

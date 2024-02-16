@@ -6,6 +6,7 @@ import axios from "axios";
 
 const initialState={
     loading:false,
+    searchproducts:new Array(),
     crecproducts:new Array(),
     precproducts:new Array(),
     irecproducts:new Array(),
@@ -138,8 +139,37 @@ export const getHomeProduct = createAsyncThunk(
   );
 
 const productSlice=createSlice({name:"product",initialState,reducers:{
-    GETPRODUCT(action,payload){
-        console.log("DONE")
+    SETPRODUCT(state,action){
+      
+      const result=action.payload
+      
+       state.searchproducts=result
+    },
+    FILTERPRODUCT(state,action){
+      const{text,result,price,rating}=action.payload
+      console.log(price,rating)
+      console.log(state.searchproducts)
+      const filteredProd=result.filter((item:any,index:Number)=>{
+        return(
+          item.discounted_price*120<=price&&item.ratings>=rating
+        )
+      })
+      // filteredProd.forEach((item,index)=>{
+        //   if(item.product_name.toLowerCase().includes(text.toLowerCase())){
+          
+          //   }
+          // })
+          // console.log(filteredProd)
+          if(filteredProd.length!=0){
+            filteredProd.sort(function(x:any,y:any){return x.product_name.toLowerCase().includes(text.toLowerCase())?-1:y.product_name.toLowerCase().includes(text.toLowerCase())?1:0})
+            
+            state.searchproducts=filteredProd
+      }
+      else{
+        state.searchproducts=result
+      }
+      
+      
     }
 
 },extraReducers(builder) {
@@ -198,9 +228,10 @@ const productSlice=createSlice({name:"product",initialState,reducers:{
       state.precproducts=action.payload
     })
 },})
-export const { GETPRODUCT } =
+export const { SETPRODUCT,FILTERPRODUCT } =
   productSlice.actions;
 export const selectProduct = (state:any) => state.product.product;
+export const selectSearchProd=(state:any)=>state.product.searchproducts
 export const selectCRecproduct = (state:any) => state.product.crecproducts;
 export const selectIRecproduct = (state:any) => state.product.irecproducts;
 export const selectTechproduct = (state:any) => state.product.techproducts;
