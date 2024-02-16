@@ -72,7 +72,7 @@ productid_author = pd.Series(products['Category'].values, index=products['Uniq I
 user_pos_items = get_user_items(edge_index)
 model=LightGCN(num_users,num_items)
 
-model.load_state_dict(torch.load('D:/E-Commerce-Personalized-Shopping-with-Expert-System-master/E-Commerce-Personalized-Shopping-with-Expert-System-master/backend/GNN/model.pth'))
+# model.load_state_dict(torch.load('D:/E-Commerce-Personalized-Shopping-with-Expert-System-master/E-Commerce-Personalized-Shopping-with-Expert-System-master/backend/GNN/model.pth'))
 
 
 app=FastAPI()
