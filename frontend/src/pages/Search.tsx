@@ -118,7 +118,7 @@ const handleKey=(e:any)=>{
         <H2 ml='1vh' mt='1vh'>Showing {filteredp.length} results for '{text}'</H2>
         {filteredp.map((item:any,index:Number)=>{
             return(
-             <ProductDetails product={item}/>
+             <ProductDetails product={item} type={0}/>
             )
         })}
 

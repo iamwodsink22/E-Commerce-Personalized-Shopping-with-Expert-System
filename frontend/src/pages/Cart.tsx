@@ -97,6 +97,7 @@ const ProductSize = styled(Span)
 
 export const PriceDetail = styled(Box)(({theme}:any)=>({
     flex: 1,
+    marginRight:'2vw',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -132,7 +133,7 @@ export const ProductPrice = styled(Box)(({theme}:any)=>({
 
 
 
-const Summary = styled(Box)(({theme}:any)=>({
+export const Summary = styled(Box)(({theme}:any)=>({
     flex: 1,
     border: '0.5px solid lightgray',
     borderRadius: '10px',
@@ -147,14 +148,14 @@ const Summary = styled(Box)(({theme}:any)=>({
   
 
 
-const SummaryTitle = styled(H1)(({theme}:any)=>({
+export const SummaryTitle = styled(H1)(({theme}:any)=>({
     fontWeight: 200,
     textAlign:'center'
 }))
   
 
 
-const SummaryItem = styled(Box)(({theme}:any)=>({
+export const SummaryItem = styled(Box)(({theme}:any)=>({
     margin: '1vw 3vw',
     display: 'flex',
     justifyContent: 'space-between',
@@ -237,17 +238,17 @@ var form=document.createElement('form')
             <TopText>Shopping Bag(2)</TopText>
             <TopText>Your Wishlist (0)</TopText>
           </TopText>
-          <Button variant="outlined" >CHECKOUT NOW</Button>
+          
         </Top>
         <Bottom>
           <Info>
-          {cart.map((item:any,index:number)=>{return(<ProductDetails product={item}/>)})}
+          {cart.map((item:any,index:number)=>{return(<ProductDetails product={item} type={1}/> )})}
           </Info>
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <Span>Subtotal</Span>
-              <Span>Rs {total}</Span>
+              <Span>Rs {total.toFixed(2)}</Span>
             </SummaryItem>
             <SummaryItem>
               <Span>Estimated Shipping</Span>
@@ -259,9 +260,9 @@ var form=document.createElement('form')
             </SummaryItem>
             <SummaryItem sx={{mb:1}}>
               <Span>Total</Span>
-              <Span>{total}</Span>
+              <Span>{total.toFixed(2)}</Span>
             </SummaryItem>
-            <Button variant='outlined' sx={{ml:'6vw'}} onClick={()=>handlePayment()} >CHECKOUT NOW</Button>
+            <Button variant='outlined' sx={{ml:'6vw',mt:'3vw'}} onClick={()=>handlePayment()} >CHECKOUT NOW</Button>
           </Summary>
         </Bottom>
       </Wrapper>

@@ -4,10 +4,13 @@ import { Span } from 'components/Typography'
 import { Box, Card, Rating, Typography } from '@mui/material';
 import { Product,ProductDetail,ProductAmount,Details,PriceDetail,ProductPrice,ProductColor,ProductAmountContainer } from 'pages/Cart'
 import { useNavigate } from 'react-router';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import DeleteIcon from '@mui/icons-material/Delete';
 interface ProductProps{
     product:any
+    type:number
 }
-const ProductDetails:FC<ProductProps> = ({product}) => {
+const ProductDetails:FC<ProductProps> = ({product,type}) => {
   const navigate=useNavigate()
   const handleView=(id:Number)=>{
     navigate(`/dashboard/view-product/${id}`)
@@ -15,7 +18,7 @@ const ProductDetails:FC<ProductProps> = ({product}) => {
 
   
   return (
-    <Card sx={{pl:'2vw',mb:'1vh',mt:'1vw',color:'white',backgroundColor:'#2c2d2d',cursor:'pointer',borderRadius:'2vw'}} onClick={()=>handleView(product.product_id)}>
+    <Card sx={{pl:'2vw',mb:'1vh',mt:'1vw',color:'black',backgroundColor:'white',cursor:'pointer',borderRadius:'2vw'}} onClick={()=>handleView(product.product_id)}>
     <Product>
               <ProductDetail>
                 <img style={{width:'80px',height:'80px', marginTop:'2vh'}} src={product.img_link} alt="hello" />
@@ -39,7 +42,11 @@ const ProductDetails:FC<ProductProps> = ({product}) => {
                   <Remove />
                 </ProductAmountContainer>
                 <ProductPrice>Rs {(product.discounted_price*120).toFixed(2)}</ProductPrice>
+
+              
               </PriceDetail>
+              {type===1&&<DeleteIcon fontSize='large' sx={{mr:'2vw',mt:'3vw'}}/>}
+              {type===2&&<ReceiptIcon fontSize='large' sx={{mr:'2vw',mt:'3vw'}}/>}
             </Product>
             </Card>
             

@@ -23,6 +23,7 @@ const Loadable = (Component:LazyExoticComponent<FC>) => (props:any) =>
   const Cart=Loadable(lazy(()=>import("./pages/Cart")))
   const CategoryShop=Loadable(lazy(()=>import('./pages/CategoryShop')))
   const Search=Loadable(lazy(()=>import('./pages/Search')))
+  const History=Loadable(lazy(()=>import("./pages/History")))
   const routes = [
     {
       path: "/",
@@ -72,6 +73,9 @@ const Loadable = (Component:LazyExoticComponent<FC>) => (props:any) =>
     },{
       path:"search/:text",
       element:<Search/>
+    },{
+      path:"history",
+      element:<History/>
     }]
     }
     ]

@@ -1,9 +1,10 @@
 import pandas as pd
-df_users=pd.read_csv("D:/UsersforId.csv")
-usr_id=[]
+import datetime
+df_users=pd.read_csv('D:/E-Commerce-Personalized-Shopping-with-Expert-System-master/E-Commerce-Personalized-Shopping-with-Expert-System-master/backend/GNN/res/Product_Users_Ratings.csv')
+timestamps=[]
 for i in range(len(df_users)):
-    usr_id.append(i+1)
+    timestamps.append(datetime.datetime.now())
     
-df_users.insert(1,"usr_id",usr_id)
+df_users.insert(3,"timestamp",timestamps)
 print(df_users.head())
-df_users.to_csv("D:/newUsers.csv",index=False)
+df_users.to_csv("D:/ratings.csv",index=False)

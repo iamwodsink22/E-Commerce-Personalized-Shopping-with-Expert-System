@@ -5,6 +5,7 @@ const authRoute = require("./routes/auth.js");
 const productRoute = require("./routes/product.js");
 const userRoute = require("./routes/user.js");
 const paymentRoute = require("./routes/payment.js");
+const transactionRoute = require("./routes/transactions.js");
 const cartRoute=require("./routes/cart.js")
 
 const cors = require("cors");
@@ -37,6 +38,7 @@ app.use("/api/products", productRoute);
 app.use("/api/users", userRoute);
 app.use("/api/payment", paymentRoute);
 app.use('/api/cart',cartRoute)
+app.use('/api/transaction',transactionRoute)
 
 app.listen(process.env.PORT || 8000, () => {
   console.log("Listening to port 8000");
