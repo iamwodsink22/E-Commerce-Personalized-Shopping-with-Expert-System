@@ -18,7 +18,7 @@ export const sidebarItems=[{
 },{
     name:'History',
     icon:HistoryIcon,
-    url:'/history'
+    url:'history'
 },{
     name:'User Profile',
     icon:PersonIcon,

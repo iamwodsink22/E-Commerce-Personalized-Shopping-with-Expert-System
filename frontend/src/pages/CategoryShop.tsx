@@ -43,7 +43,7 @@ const handleView=(id:number)=>{
       <Box display={'flex'} mt='2vw'>
 
       <H3 style={{fontFamily:'Poppins', marginLeft:'2vw', fontSize:'20px'}}>{title}</H3>
-      <SearchProduct/>
+      
       </Box>
         <Box sx={{display:'grid',gridTemplateColumns: 'auto auto auto auto',marginTop:'1vh', ml:'1vw'}}>
         {products.slice(0,15).map((item:any,index:number)=>{

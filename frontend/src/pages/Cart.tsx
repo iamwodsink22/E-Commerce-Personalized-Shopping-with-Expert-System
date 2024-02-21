@@ -132,7 +132,7 @@ export const ProductPrice = styled(Box)(({theme}:any)=>({
 
 
 
-const Summary = styled(Box)(({theme}:any)=>({
+export const Summary = styled(Box)(({theme}:any)=>({
     flex: 1,
     border: '0.5px solid lightgray',
     borderRadius: '10px',
@@ -147,14 +147,14 @@ const Summary = styled(Box)(({theme}:any)=>({
   
 
 
-const SummaryTitle = styled(H1)(({theme}:any)=>({
+export const SummaryTitle = styled(H1)(({theme}:any)=>({
     fontWeight: 200,
     textAlign:'center'
 }))
   
 
 
-const SummaryItem = styled(Box)(({theme}:any)=>({
+export const SummaryItem = styled(Box)(({theme}:any)=>({
     margin: '1vw 3vw',
     display: 'flex',
     justifyContent: 'space-between',
