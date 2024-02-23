@@ -35,7 +35,7 @@ export const StyledProductWrapper=styled(Box)(()=>({
   padding:'0.5vw',
   backgroundImage:"url('/static/bgh.jpg')",
   color:'white',
-  height:'88vh'
+  height:'30vh'
 }))
 const Shop:FC = () => {
   console.log("shop")
@@ -66,13 +66,15 @@ const personalizedProducts:any=useSelector<any>(selectPProduct)
     <>
       {/* <SearchProduct/> */}
     <StyledProductWrapper>
-      <div style={{display:'flex',marginTop:'25vh'}}>
-      <CatBox  title={"Sports and Outdoor"}/>
-      <CatBox title={"Toys and Games"}/>
-      <CatBox title={"Clothing, Shoes and Jewellery"}/>
+      <div style={{display:'flex',marginTop:'25vh', marginBottom:'10vh'}}>
+
       
      
       </div>
+      <Box marginTop={'10vh'}><CatBox  title={"Sports and Outdoor"}/>
+      <CatBox title={"Toys and Games"}/>
+      <CatBox title={"Clothing, Shoes and Jewellery"}/></Box>
+      
       <Secred products={personalizedProducts}
        title={'Personalized Recommendations for you'} colour={'#cccccc'}/>
     </StyledProductWrapper>

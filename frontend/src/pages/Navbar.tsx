@@ -72,10 +72,12 @@ const DashboardNavbar: FC = (
           color="text.primary"
           fontFamily={'Poppins'}
           letterSpacing={0.25}
+          width={'50vh'}
         >
           {name}
         </H2>
-        {/* <SearchProduct/> */}
+        <SearchProduct/>
+        <div>SearchResults</div>
         
 
         {/* <Box flexGrow={1} mr={0} /> */}

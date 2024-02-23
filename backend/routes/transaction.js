@@ -1,4 +1,4 @@
-const Transaction=require('../models/Transaction')
+const Transaction=require('../models/Transaction.js')
 const Product=require('../models/Product.js')
 const router=require("express").Router()
 

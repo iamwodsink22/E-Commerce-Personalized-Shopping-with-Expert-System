@@ -14,7 +14,7 @@ const ExpandableParagraph: React.FC<ExpandableParagraphProps> = ({ text, maxLeng
 
   return (
     <div>
-      <p style={{alignItems:'left', fontFamily:'sans-serif', fontSize:'2.6vh', width:'40vw', lineHeight: 1.4}}>
+      <p style={{alignItems:'left', fontFamily:'Roboto', fontSize:'2.6vh', width:'40vw', lineHeight: 1.4}}>
         {expanded ? text : `${text?.slice(0, maxLength)}...`}
         {!expanded && text?.length > maxLength && (
           <span style={{ color: 'blue', cursor: 'pointer' }} onClick={toggleExpanded}>

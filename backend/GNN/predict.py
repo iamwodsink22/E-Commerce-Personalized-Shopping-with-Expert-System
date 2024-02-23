@@ -1,22 +1,22 @@
 import torch
 import pandas as pd
 from torch_geometric.nn import LGConv
-from torch import nn, optim, Tensor
+from torch import nn
 from PIL import Image
 import  matplotlib.pyplot as plt
 from sklearn.neighbors import NearestNeighbors
 from scipy.sparse import csr_matrix
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from sentence_transformer import SentenceTransformer,mean_pooling,my_model,tokenizer
+from  backend.GNN.sentence_transformer import SentenceTransformer,mean_pooling,my_model,tokenizer
 import numpy as np
 sentence_transformer=SentenceTransformer(my_model)
-sentence_transformer.load_weights('D:/E-Commerce-Personalized-Shopping-with-Expert-System-master/E-Commerce-Personalized-Shopping-with-Expert-System-master/backend/GNN/sent/weights')
-loaded_emb=np.load('D:/E-Commerce-Personalized-Shopping-with-Expert-System-master/E-Commerce-Personalized-Shopping-with-Expert-System-master/backend/GNN/sent/embeddings.npz')
-embedding_arr=np.array(loaded_emb['arr_0'])
-embedding_arr=embedding_arr.reshape(-1,embedding_arr.shape[2])
-products=np.load('D:/E-Commerce-Personalized-Shopping-with-Expert-System-master/E-Commerce-Personalized-Shopping-with-Expert-System-master/backend/GNN/sent/product_titles.npz')
-product_arr=np.array(products['arr_0'])
+# sentence_transformer.load_weights('D:/E-Commerce-Personalized-Shopping-with-Expert-System-master/E-Commerce-Personalized-Shopping-with-Expert-System-master/backend/GNN/sent/weights')
+# loaded_emb=np.load('D:/E-Commerce-Personalized-Shopping-with-Expert-System-master/E-Commerce-Personalized-Shopping-with-Expert-System-master/backend/GNN/sent/embeddings.npz')
+# embedding_arr=np.array(loaded_emb['arr_0'])
+# embedding_arr=embedding_arr.reshape(-1,embedding_arr.shape[2])
+# products=np.load('D:/E-Commerce-Personalized-Shopping-with-Expert-System-master/E-Commerce-Personalized-Shopping-with-Expert-System-master/backend/GNN/sent/product_titles.npz')
+# product_arr=np.array(products['arr_0'])
 class LightGCN(nn.Module):
     def __init__(self, num_users, num_items, num_layers=4, dim_h=64):
         super().__init__()
@@ -46,9 +46,9 @@ class LightGCN(nn.Module):
 
         return emb_users_final, self.emb_users.weight, emb_items_final, self.emb_items.weight
 
-pf = pd.read_csv('D:/E-Commerce-Personalized-Shopping-with-Expert-System-master/E-Commerce-Personalized-Shopping-with-Expert-System-master/backend/GNN/res/Product_Users_Ratings.csv', sep=',', encoding='latin-1')
-users = pd.read_csv('D:/E-Commerce-Personalized-Shopping-with-Expert-System-master/E-Commerce-Personalized-Shopping-with-Expert-System-master/backend/GNN/res/Users.csv', sep=',', encoding='latin-1')
-products = pd.read_csv('D:/E-Commerce-Personalized-Shopping-with-Expert-System-master/E-Commerce-Personalized-Shopping-with-Expert-System-master/backend/GNN/res/amazon-products.csv', sep=',', encoding='latin-1', on_bad_lines='skip')
+pf = pd.read_csv('C:/Users/User/Downloads/E-Commerce-Personalized-Shopping-with-Expert-System-test/E-Commerce-Personalized-Shopping-with-Expert-System-test/backend/GNN/res/Product_Users_Ratings.csv', sep=',', encoding='latin-1')
+users = pd.read_csv('C:/Users/User/Downloads/E-Commerce-Personalized-Shopping-with-Expert-System-test/E-Commerce-Personalized-Shopping-with-Expert-System-test/backend/GNN/res/Users.csv', sep=',', encoding='latin-1')
+products = pd.read_csv('C:/Users/User/Downloads/E-Commerce-Personalized-Shopping-with-Expert-System-test/E-Commerce-Personalized-Shopping-with-Expert-System-test/backend/GNN/res/amazon-products.csv', sep=',', encoding='latin-1', on_bad_lines='skip')
 def get_user_items(edge_index):
     user_items = dict()
     for i in range(edge_index.shape[1]):
@@ -72,7 +72,7 @@ productid_author = pd.Series(products['Category'].values, index=products['Uniq I
 user_pos_items = get_user_items(edge_index)
 model=LightGCN(num_users,num_items)
 
-model.load_state_dict(torch.load('D:/E-Commerce-Personalized-Shopping-with-Expert-System-master/E-Commerce-Personalized-Shopping-with-Expert-System-master/backend/GNN/model.pth'))
+# model.load_state_dict(torch.load('D:/E-Commerce-Personalized-Shopping-with-Expert-System-master/E-Commerce-Personalized-Shopping-with-Expert-System-master/backend/GNN/model.pth'))
 
 
 app=FastAPI()
@@ -107,35 +107,35 @@ def recommend(user_id, num_recs=15):
     titles = [productid_title[id] for id in item_isbns]
     authors = [productid_author[id] for id in item_isbns]
     for title in titles:
-        for i in range(len(df_data['product_name'])):
-            if df_data['product_name'][i]==title:
+        for i in range(len(df_data['Product Name'])):
+            if df_data['Product Name'][i]==title:
                 if df_data.iloc[i].to_dict() not in rec_products:
                     rec_products.append(df_data.iloc[i].to_dict())
     return {'recs':rec_products}
 
-@app.get('/search/{key}')
-def get_results(key):
-  inputs=tokenizer([key],max_length=64,padding='max_length',truncation=True,return_tensors='tf')
-  logits=my_model(**inputs)
-  out_embedding=mean_pooling(logits,inputs['attention_mask'])
-  dot_p=np.matmul(embedding_arr,(np.array(out_embedding).T))
-  u_mag=np.sqrt(np.sum(embedding_arr*embedding_arr,axis=-1))
-  v_mag=np.sqrt(np.sum(out_embedding*out_embedding,axis=-1))
+# @app.get('/search/{key}')
+# def get_results(key):
+#   inputs=tokenizer([key],max_length=64,padding='max_length',truncation=True,return_tensors='tf')
+#   logits=my_model(**inputs)
+#   out_embedding=mean_pooling(logits,inputs['attention_mask'])
+#   dot_p=np.matmul(embedding_arr,(np.array(out_embedding).T))
+#   u_mag=np.sqrt(np.sum(embedding_arr*embedding_arr,axis=-1))
+#   v_mag=np.sqrt(np.sum(out_embedding*out_embedding,axis=-1))
 
-  cosine_similarity=dot_p.T/(u_mag*v_mag)
-  sorted_indices=np.argsort(cosine_similarity,axis=-1)
+#   cosine_similarity=dot_p.T/(u_mag*v_mag)
+#   sorted_indices=np.argsort(cosine_similarity,axis=-1)
   
-  results=[]
-  dict_result=[]
-  for i in range(100):
-      results.append(product_arr[sorted_indices[:,len(sorted_indices[0])-i-1]][0])
-  new_list=list(set(results))
-  for title in new_list:
-        for i in range(len(df_data['product_name'])):
-            if df_data['product_name'][i]==title:
-                if df_data.iloc[i].to_dict() not in dict_result:
-                    dict_result.append(df_data.iloc[i].to_dict())
-  return {'result':dict_result}
+#   results=[]
+#   dict_result=[]
+#   for i in range(100):
+#       results.append(product_arr[sorted_indices[:,len(sorted_indices[0])-i-1]][0])
+#   new_list=list(set(results))
+#   for title in new_list:
+#         for i in range(len(df_data['product_name'])):
+#             if df_data['product_name'][i]==title:
+#                 if df_data.iloc[i].to_dict() not in dict_result:
+#                     dict_result.append(df_data.iloc[i].to_dict())
+#   return {'result':dict_result}
   
 new_rate = pd.read_csv('D:/E-Commerce-Personalized-Shopping-with-Expert-System-master/E-Commerce-Personalized-Shopping-with-Expert-System-master/backend/amazon/ratings.csv')
 

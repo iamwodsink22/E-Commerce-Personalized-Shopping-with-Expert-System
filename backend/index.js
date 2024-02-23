@@ -10,6 +10,7 @@ const cors = require("cors");
 const bp = require("body-parser");
 const path = require("path");
 const app = express();
+const transactionRoute= require('./routes/transaction.js');
 
 dotenv.config();
 
@@ -36,7 +37,8 @@ app.use("/api/auth", authRoute);
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoute);
 app.use("/api/payment", paymentRoute);
-app.use('/api/cart',cartRoute)
+app.use('/api/cart',cartRoute);
+app.use('/api/transaction', transactionRoute);
 
 app.listen(process.env.PORT || 8000, () => {
   console.log("Listening to port 8000");

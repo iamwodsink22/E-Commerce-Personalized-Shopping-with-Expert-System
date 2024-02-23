@@ -173,6 +173,7 @@ const Product = () => {
         }
     const newt=await axios.post('http://localhost:8000/api/payment/initiate',data_raw)
     const newP=newt.data
+
     
     console.log(newP)
     var form=document.createElement('form')
@@ -242,10 +243,10 @@ objectFit: 'cover',boxShadow:'rgba(0, 0, 0, 0.24) 0px 3px 8px'}} src={product.im
         <hr style={{color:'#4e4e4e', height: '3px'}}/>
 
         <Box paddingTop={'0.2vh'} paddingBottom={'1vh'}>
-          <span style={{fontFamily:'Poppins',fontSize:'3.5vh',color:'#5d5d5d', fontWeight:'bold', marginLeft:'0.3vw'}}><s>${Number(product.discounted_price)+25}</s></span>
+          <span style={{fontFamily:'Poppins',fontSize:'3.5vh',color:'#5d5d5d', fontWeight:'bold', marginLeft:'0.3vw'}}><s>${Number(Number(product.discounted_price)+((5/100)*Number(product.discounted_price))).toPrecision(3)}</s></span>
           &nbsp; &nbsp;  
           <span style={{fontFamily:'Poppins',fontSize:'4vh', fontWeight:'bold'}}>${Number(product.discounted_price)}</span>
-          <p style={{fontFamily:'Poppins', fontSize:'2.1vh', fontWeight:'bold', marginTop:'0.4vh', color:'#4f4f4f'}}>You save:   <span style={{fontWeight:'normal'}}>${25}</span> </p>
+          <p style={{fontFamily:'Poppins', fontSize:'2.1vh', fontWeight:'bold', marginTop:'0.4vh', color:'#4f4f4f'}}>You save:   <span style={{fontWeight:'normal'}}>${((Number(Number(product.discounted_price)+((5/100)*Number(product.discounted_price)))-Number(product.discounted_price))).toPrecision(1)}</span> </p>
           
         </Box>
         
@@ -280,7 +281,7 @@ objectFit: 'cover',boxShadow:'rgba(0, 0, 0, 0.24) 0px 3px 8px'}} src={product.im
           {/* </FilterContainer> */}
           
           </InfoContainer>
-<Box position={'absolute'} left='10vw'>
+<Box position={'relative'} left='10vw' marginTop={'10vh'}>
 
         
             <AmountContainer paddingTop={'10vh'}>

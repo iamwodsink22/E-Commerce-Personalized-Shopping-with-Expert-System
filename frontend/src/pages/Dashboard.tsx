@@ -4,7 +4,7 @@ import {Box,styled} from '@mui/material'
 import { Outlet } from "react-router-dom";
 import DashboardNavbar from './Navbar'
 import SearchProduct from './SearchProduct';
-import Footer from './Footer';
+// import Footer from './Footer';
 const Wrapper:FC = styled(Box)(({ theme }:any) => ({
     width: `calc(100% - 80px)`,
     maxWidth: 1200,
@@ -45,7 +45,7 @@ const Dashboard:FC<PropsWithChildren> = ({children}) => {
         <DashboardNavbar/>
         
         {children || <Outlet />}
-        <Footer/>
+        {/* <Footer/> */}
        </Wrapper>
     
     </Fragment>
