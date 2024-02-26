@@ -13,8 +13,8 @@ import { FILTERPRODUCT, SETPRODUCT, selectSearchProd } from 'redux/productReduce
 
 const Search = () => {
     const filteredp=useSelector(selectSearchProd)
-    const {text}=useParams()
-    const [search,setsearch]=useState(text)
+    const {query}=useParams()
+    const [search,setsearch]=useState(query)
     const [contextsearch,setcontextsearch]=useState('true')
     const [product,setproduct]=useState <Array<Object>>([])
     const [price,setprice]=useState<number>(25000)
@@ -32,18 +32,18 @@ const Search = () => {
     }
 
 const x=async()=>{
-        const results:any=await axios.get(`http://127.0.0.1:4000/search/${text}`)
+        const results:any=await axios.get(`http://127.0.0.1:4000/search/${query}`)
         const result:Array<Object>= results.data.result
         setproduct(result)
         dispatch(SETPRODUCT(result))
-        dispatch(FILTERPRODUCT({text,result,price,rating}))
+        dispatch(FILTERPRODUCT({query,result,price,rating}))
     }
 useEffect(()=>{
    x()
     
 
 
-},[text,price,rating])
+},[query,price,rating])
 
 const handleSearch=()=>{
 navigate(`/dashboard/search/${search}`)
@@ -57,8 +57,7 @@ const handleKey=(e:any)=>{
     <Box>
 
     <Box ml={'65vw'}>
-        <SearchInput value={search} onChange={(e)=>setsearch(e.target.value)} onKeyDown={handleKey}/>
-        <Button sx={{marginLeft:'2vh',marginBottom:'1vh'}} variant='contained' color='primary' onClick={handleSearch}>Search</Button>
+        
     </Box>
     <Box display={'flex'} mt={'1vw'}>
 
@@ -115,7 +114,7 @@ const handleKey=(e:any)=>{
 
     </Card>
     <Card sx={{width:'65vw',ml:'5vw'}}>
-        <H2 ml='1vh' mt='1vh'>Showing {filteredp.length} results for '{text}'</H2>
+        <H2 ml='1vh' mt='1vh'>Showing {filteredp.length} results for '{query}'</H2>
         {filteredp.map((item:any,index:Number)=>{
             return(
              <ProductDetails product={item}/>

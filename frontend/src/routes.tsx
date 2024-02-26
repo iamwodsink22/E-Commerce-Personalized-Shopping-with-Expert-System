@@ -14,7 +14,7 @@ const Loadable = (Component:LazyExoticComponent<FC>) => (props:any) =>
   );
   const Login = Loadable(lazy(() => import("./pages/Login")));
   const Register = Loadable(lazy(() => import("./pages/Register")));
-  
+  const Search=Loadable(lazy(()=>import("./pages/Search")))
   const Home = Loadable(lazy(() => import("./pages/Home")));
   const Shop = Loadable(lazy(() => import("./pages/Shop")));
   const ViewProduct=Loadable(lazy(() => import("./pages/ViewProduct")));
@@ -63,7 +63,7 @@ const Loadable = (Component:LazyExoticComponent<FC>) => (props:any) =>
     ,{
       path:"category/:title",
       element:<CategoryShop/>
-    },{
+    },{path:"search/:query",element:<Search/>},{
       path:"user",
       element:<User/>
     },{

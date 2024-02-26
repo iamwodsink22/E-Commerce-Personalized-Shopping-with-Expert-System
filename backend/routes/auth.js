@@ -62,7 +62,7 @@ router.post("/login", async (req, res) => {
     res.setHeader("token", accessToken);
     return res.status(200).json({ accessToken, user });
   } catch (err) {
-    console.log(err);
+    
     return res.status(500).json(err);
   }
 });

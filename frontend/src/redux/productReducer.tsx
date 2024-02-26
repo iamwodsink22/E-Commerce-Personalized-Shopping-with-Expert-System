@@ -13,6 +13,7 @@ const initialState={
     techproducts:new Array(),
     homeproducts:new Array(),
     elecproducts:new Array(),
+    popular:new Array(),
 
     product:{}
 }
@@ -66,6 +67,28 @@ export const getPRecProduct = createAsyncThunk(
         
        
         const c_recs=res.data.recs
+        
+        return c_recs
+      } catch (error:any) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        return thunkAPI.rejectWithValue(message);
+      }
+    }
+  );
+export const getPopular = createAsyncThunk(
+    "/products/popular",
+    async (_, thunkAPI:any) => {
+      try {
+        
+        const res= await axios.get(`http://127.0.0.1:4000/popular`)
+        
+       
+        const c_recs=res.data.popular
         
         return c_recs
       } catch (error:any) {
@@ -146,7 +169,7 @@ const productSlice=createSlice({name:"product",initialState,reducers:{
        state.searchproducts=result
     },
     FILTERPRODUCT(state,action){
-      const{text,result,price,rating}=action.payload
+      const{query,result,price,rating}=action.payload
       console.log(price,rating)
       console.log(state.searchproducts)
       const filteredProd=result.filter((item:any,index:Number)=>{
@@ -161,7 +184,7 @@ const productSlice=createSlice({name:"product",initialState,reducers:{
           // })
           // console.log(filteredProd)
           if(filteredProd.length!=0){
-            filteredProd.sort(function(x:any,y:any){return x.product_name.toLowerCase().includes(text.toLowerCase())?-1:y.product_name.toLowerCase().includes(text.toLowerCase())?1:0})
+            filteredProd.sort(function(x:any,y:any){return x?.product_name.toLowerCase().includes(query.toLowerCase())?-1:y.product_name.toLowerCase().includes(query.toLowerCase())?1:0})
             
             state.searchproducts=filteredProd
       }
@@ -227,10 +250,17 @@ const productSlice=createSlice({name:"product",initialState,reducers:{
     .addCase(getPRecProduct.fulfilled,(state,action:any)=>{
       state.precproducts=action.payload
     })
+    .addCase(getPopular.pending,(state,action:any)=>{
+      state.loading=true
+    })
+    .addCase(getPopular.fulfilled,(state,action:any)=>{
+      state.popular=action.payload
+    })
 },})
 export const { SETPRODUCT,FILTERPRODUCT } =
   productSlice.actions;
 export const selectProduct = (state:any) => state.product.product;
+export const selectPopular=(state:any)=>state.product.popular;
 export const selectSearchProd=(state:any)=>state.product.searchproducts
 export const selectCRecproduct = (state:any) => state.product.crecproducts;
 export const selectIRecproduct = (state:any) => state.product.irecproducts;
