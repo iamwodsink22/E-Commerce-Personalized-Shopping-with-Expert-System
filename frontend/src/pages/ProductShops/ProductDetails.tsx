@@ -1,7 +1,7 @@
 import React,{FC} from 'react'
 import { Add, Remove } from "@mui/icons-material";
 import { Span } from 'components/Typography'
-import { Card } from '@mui/material';
+import { Card, Rating } from '@mui/material';
 import { Product,ProductDetail,ProductAmount,Details,PriceDetail,ProductPrice,ProductColor,ProductAmountContainer } from 'pages/Cart';
 import { useNavigate } from 'react-router';
 
@@ -39,8 +39,8 @@ const ProductDetails:FC<ProductProps> = ({product}) => {
                   <Add />
                   <button>{product[product.id]}</button>
                   <Remove />
-                  <ProductAmount style={{marginLeft:'3vw', fontFamily:'Poppins', fontSize:'20px', color:'grey'}}>${product.discounted_price}</ProductAmount>
-                  <ProductPrice style={{marginLeft:'3vw', fontFamily:'Poppins', color:'black', fontWeight:'550'}}>${product.discounted_price*product[product.id]}</ProductPrice>
+                  <ProductAmount style={{marginLeft:'3vw', fontFamily:'Poppins', fontSize:'20px', color:'grey'}}>Rs{(product.discounted_price*120).toFixed(0)}</ProductAmount>
+                  <ProductPrice style={{marginLeft:'3vw', fontFamily:'Poppins', color:'black', fontWeight:'550'}}>Rs{(product.discounted_price*105).toFixed(0)}</ProductPrice>
                   <img style={{marginLeft:'3vw'}} width={'45vw'} src='https://cdn.iconscout.com/icon/free/png-256/free-remove-320-451046.png' alt="" />
                   
                 </ProductAmountContainer>
@@ -48,6 +48,7 @@ const ProductDetails:FC<ProductProps> = ({product}) => {
                 
               </PriceDetail>
             </Product>
+            <Rating sx={{ml:'15vw'}}value={product.ratings}/>
             </Card>
             
   )
