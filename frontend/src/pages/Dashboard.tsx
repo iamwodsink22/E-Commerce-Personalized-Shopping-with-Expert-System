@@ -21,7 +21,7 @@ const Wrapper:FC = styled(Box)(({ theme }:any) => ({
 const Dashboard:FC<PropsWithChildren> = ({children}) => {
     const Wrapper = styled(Box)(({ theme }:any) => ({
         // width: `calc(100% - 80)`,
-        width:'94.1vw',
+        width:'96vw',
         position:'absolute',
         top:'0',
         height:'180%',

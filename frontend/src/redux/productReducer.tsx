@@ -85,7 +85,7 @@ export const getPopular = createAsyncThunk(
     async (_, thunkAPI:any) => {
       try {
         
-        const res= await axios.get(`http://127.0.0.1:4000/popular`)
+        const res= await axios.get(`http://localhost:8000/api/products/getpopular`)
         
        
         const c_recs=res.data.popular

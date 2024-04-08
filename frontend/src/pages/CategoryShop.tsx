@@ -6,7 +6,7 @@ import { H3 } from 'components/Typography'
 import React, { useEffect, useState } from 'react'
 import { productList } from './ProductList'
 import { useSelector } from 'react-redux'
-import { selectTechproduct,selectElecproduct, selectHomeproduct } from 'redux/productReducer'
+import { selectTechproduct,selectElecproduct, selectHomeproduct, selectCRecproduct, selectPProduct, selectPopular } from 'redux/productReducer'
 import SearchProduct from './SearchProduct'
 import TextSlicer from 'components/TextSlicer'
 
@@ -17,20 +17,30 @@ const CategoryShop = () => {
     const navigate=useNavigate()
     const watches=useSelector(selectTechproduct)
     const books=useSelector(selectElecproduct)
+const personalizedProducts:any=useSelector<any>(selectPProduct)
+const mostpopular:any=useSelector<any>(selectPopular)
     const shoes=useSelector(selectHomeproduct)
 
 useEffect(()=>{
     if(title==='Smart Watches'){
         setproducts(watches)
     }
-    else{
-      if(title==='Books'){
+  
+    else if(title==='Books'){
       setproducts(books)
   }
-  else{
+  
+    else if(title==='Personalized Recommendations for you'){
+      setproducts(personalizedProducts)
+    }
+  
+  else if(title==='Shoes and Slippers'){
       setproducts(shoes)
   }
-}
+  else{
+    setproducts(mostpopular)
+  }
+
 },[title])
    
 const handleView=(id:number)=>{

@@ -77,7 +77,7 @@ const DashboardNavbar: FC = (
           {name}
         </H2>
         <SearchProduct/>
-        <div>SearchResults</div>
+        
         
 
         {/* <Box flexGrow={1} mr={0} /> */}

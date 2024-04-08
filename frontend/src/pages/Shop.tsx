@@ -35,14 +35,13 @@ export const StyledProductWrapper=styled(Box)(()=>({
   fontFamily: "'Philosopher', sans-serif",
   justifyContent:'center',
   padding:'0.5vw',
-  backgroundImage:"url('/static/bgh.jpg')",
+  backgroundImage:"url('/static/mybanner2.jpg')",
   color:'white',
-  height:'30vh'
+  height:'55vh'
 }))
 const Shop:FC = () => {
   const history=useSelector(selectHistory)
   const {user}=useAuth()
-  console.log("shop")
   const dispatch=useDispatch<any>()
   useTitle("Browse Products")
   
@@ -63,6 +62,9 @@ dispatch(getPRecProduct(user?.usr_id))
 // const homeproducts:any=useSelector<any>(selectHomeproduct)
 const personalizedProducts:any=useSelector<any>(selectPProduct)
 const mostpopular:any=useSelector<any>(selectPopular)
+const watches=useSelector(selectTechproduct)
+const books=useSelector(selectElecproduct)
+const shoes=useSelector(selectHomeproduct)
 
     
 
@@ -81,13 +83,13 @@ const mostpopular:any=useSelector<any>(selectPopular)
       
      
       </div>
-      <Box marginTop={'10vh'}><CatBox  title={"Smart Watches"}/>
-      <CatBox title={"Shoes and Slippers"}/></Box>
-      <CatBox title={"Books"}/>
+      <Box marginTop={'25vh'}><CatBox  title={"Smart Watches"} products={watches}/>
+      <CatBox title={"Shoes and Slippers"} products={shoes}/></Box>
+      <CatBox title={"Books"} products={books}/>
       
-      {history.length==0?(<Secred products={mostpopular}
-       title={'Most Popular Products'} colour={'#cccccc'}/>):(<Secred products={personalizedProducts}
-        title={'Personalized Recommendations for you'} colour={'#cccccc'}/>)}
+      {history.length==0?(<CatBox products={mostpopular}
+       title={'Most Popular Products'} />):(<CatBox products={personalizedProducts}
+        title={'Personalized Recommendations for you'} />)}
     </StyledProductWrapper>
     
         </>

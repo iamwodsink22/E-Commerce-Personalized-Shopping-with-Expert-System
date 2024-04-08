@@ -90,4 +90,10 @@ router.get("/getcategory", async (req, res) => {
     return res.status(500).json(error);
   }
 });
+router.get("/getpopular",async(req,res)=>{
+  const list=await Products.find({})
+
+  list.sort((a, b) => b["ratings"] - a["ratings"]);
+  return  res.status(200).json({'popular':list.slice(0, 15)});
+})
 module.exports = router;
