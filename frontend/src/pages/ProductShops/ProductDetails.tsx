@@ -3,14 +3,16 @@ import { Add, Remove } from "@mui/icons-material";
 import { Span } from 'components/Typography'
 import { Card } from '@mui/material';
 import { Product,ProductDetail,ProductAmount,Details,PriceDetail,ProductPrice,ProductColor,ProductAmountContainer } from 'pages/Cart';
+import { useNavigate } from 'react-router';
 
 interface ProductProps{
     product:any
 }
 const ProductDetails:FC<ProductProps> = ({product}) => {
+  const navigate=useNavigate()
   
   return (
-    <Card sx={{pl:'2vw',mb:'1vh'}}>
+    <Card sx={{pl:'2vw',mb:'1vh',cursor:'pointer'}} onClick={()=>navigate(`/dashboard/view-product/${product.product_id}`)}>
     <Product>
               <ProductDetail>
                 <div style={{width:'150px', backgroundColor:'white', justifyContent:'center', borderRight:'1px solid #E3E3E3', margin:'1vh 0vh 1vh 0vh'}}>

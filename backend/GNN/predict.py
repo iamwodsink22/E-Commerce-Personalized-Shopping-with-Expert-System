@@ -46,9 +46,9 @@ class LightGCN(nn.Module):
 
         return emb_users_final, self.emb_users.weight, emb_items_final, self.emb_items.weight
 
-pf = pd.read_csv('D:/Ecommerce/backend/GNN/res/Product_Users_Ratings.csv', sep=',', encoding='latin-1')
+df = pd.read_csv('D:/Ecommerce/backend/GNN/res/Product_Users_Ratings.csv', sep=',', encoding='latin-1')
 users = pd.read_csv('D:/Ecommerce/backend/GNN/res/Users.csv', sep=',', encoding='latin-1')
-products = pd.read_csv('D:/Ecommerce/backend/GNN/res/amazon-products.csv', sep=',', encoding='latin-1', on_bad_lines='skip')
+products = pd.read_csv('D:/Ecommerce/backend/GNN/res/Completed.csv', sep=',', encoding='latin-1', on_bad_lines='skip')
 def get_user_items(edge_index):
     user_items = dict()
     for i in range(edge_index.shape[1]):
@@ -59,7 +59,7 @@ def get_user_items(edge_index):
         user_items[user].append(item)
     return user_items
 
-df = pf.loc[pf['product_id'].isin(products['Uniq Id'].unique()) & pf['user_id'].isin(users['user_id'].unique())]
+df = df.loc[df['product_id'].isin(products['Uniq Id'].unique()) & df['user_id'].isin(users['user_id'].unique())]
 user_mapping = {userid: i for i, userid in enumerate(df['user_id'].unique())}
 item_mapping = {isbn: i for i, isbn in enumerate(df['product_id'].unique())}
 num_users = len(user_mapping)
@@ -72,7 +72,7 @@ productid_author = pd.Series(products['Category'].values, index=products['Uniq I
 user_pos_items = get_user_items(edge_index)
 model=LightGCN(num_users,num_items)
 
-# model.load_state_dict(torch.load('D:/E-Commerce-Personalized-Shopping-with-Expert-System-master/E-Commerce-Personalized-Shopping-with-Expert-System-master/backend/GNN/model.pth'))
+model.load_state_dict(torch.load('D:/ECommerce/backend/GNN/model.pth'))
 
 
 app=FastAPI()
@@ -86,32 +86,34 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-df_data=pd.read_csv('D:/Ecommerce/backend/GNN/res/amazon-products2.csv')
+df_data=pd.read_csv('D:/Ecommerce/backend/GNN/res/amazon2.csv')
 df_data.fillna(value="No Info",inplace=True)
-@app.get('/getrecs/{user_id}')
-def recommend(user_id, num_recs=15):
-    rec_products=[]
-    user_id=int(user_id)
-    user = user_mapping[user_id]
-    emb_user = model.emb_users.weight[user]
-    ratings = model.emb_items.weight @ emb_user
 
-    values, indices = torch.topk(ratings, k=100)
 
-    ids = [index.cpu().item() for index in indices if index in user_pos_items[user]][:num_recs]
-    item_isbns = [list(item_mapping.keys())[list(item_mapping.values()).index(book)] for book in ids]
-    titles = [productid_title[id] for id in item_isbns]
-    authors = [productid_author[id] for id in item_isbns]
-    ids = [index.cpu().item() for index in indices if index not in user_pos_items[user]][:num_recs]
-    item_isbns = [list(item_mapping.keys())[list(item_mapping.values()).index(book)] for book in ids]
-    titles = [productid_title[id] for id in item_isbns]
-    authors = [productid_author[id] for id in item_isbns]
-    for title in titles:
-        for i in range(len(df_data['product_name'])):
-            if df_data['product_name'][i]==title:
-                if df_data.iloc[i].to_dict() not in rec_products:
-                    rec_products.append(df_data.iloc[i].to_dict())
-    return {'recs':rec_products}
+# @app.get('/getrecs/{user_id}')
+# def recommend(user_id, num_recs=15):
+#     rec_products=[]
+#     user_id=int(user_id)
+#     user = user_mapping[user_id]
+#     emb_user = model.emb_users.weight[user]
+#     ratings = model.emb_items.weight @ emb_user
+
+#     values, indices = torch.topk(ratings, k=100)
+
+#     ids = [index.cpu().item() for index in indices if index in user_pos_items[user]][:num_recs]
+#     item_isbns = [list(item_mapping.keys())[list(item_mapping.values()).index(book)] for book in ids]
+#     titles = [productid_title[id] for id in item_isbns]
+#     authors = [productid_author[id] for id in item_isbns]
+#     ids = [index.cpu().item() for index in indices if index not in user_pos_items[user]][:num_recs]
+#     item_isbns = [list(item_mapping.keys())[list(item_mapping.values()).index(book)] for book in ids]
+#     titles = [productid_title[id] for id in item_isbns]
+#     authors = [productid_author[id] for id in item_isbns]
+#     for title in titles:
+#         match=df_data[df_data['product_name']==title]
+       
+#         if df_data.iloc[match.index[0]].to_dict() not in rec_products:
+#             rec_products.append(df_data.iloc[match.index[0]].to_dict())
+#     return {'recs':rec_products}
 
 @app.get('/search/{key}')
 def get_results(key):
@@ -131,38 +133,39 @@ def get_results(key):
       results.append(product_arr[sorted_indices[:,len(sorted_indices[0])-i-1]][0])
   new_list=list(set(results))
   for title in new_list:
-        for i in range(len(df_data['product_name'])):
-            if df_data['product_name'][i]==title:
-                if df_data.iloc[i].to_dict() not in dict_result:
-                    dict_result.append(df_data.iloc[i].to_dict())
+        match=df_data[df_data['product_name']==title]
+       
+        if df_data.iloc[match.index[0]].to_dict() not in dict_result:
+            dict_result.append(df_data.iloc[match.index[0]].to_dict())
+                    
   return {'result':dict_result}
   
-new_rate = pd.read_csv('D:/E-Commerce-Personalized-Shopping-with-Expert-System-master/E-Commerce-Personalized-Shopping-with-Expert-System-master/backend/amazon/ratings.csv')
+# new_rate = pd.read_csv('D:/Ecommerce/backend/GNN/res/ratings.csv')
 
-p_t = new_rate.pivot_table(
-    values='rating', index='product_id', columns='user_id', fill_value=0)
-product_sparse = csr_matrix(p_t)
+# p_t = new_rate.pivot_table(
+#     values='rating', index='product_id', columns='user_id', fill_value=0)
+# product_sparse = csr_matrix(p_t)
 
-nn_model = NearestNeighbors(algorithm='brute')
-nn_model.fit(product_sparse)
-products_id = p_t.index
-@app.get('/itemrecs/{p_id}')
-def item_based(p_id):
-    recs=[]
-    ids = []
-    for i in range(len(df_data['product_id'])):
-        if df_data['product_id'][i] == p_id:
-            product_id = i
+# nn_model = NearestNeighbors(algorithm='brute')
+# nn_model.fit(product_sparse)
+# products_id = p_t.index
+# @app.get('/itemrecs/{p_id}')
+# def item_based(p_id):
+#     recs=[]
+#     ids = []
+#     for i in range(len(df_data['product_id'])):
+#         if df_data['product_id'][i] == p_id:
+#             product_id = i
 
-    # my_model = pickle.load(open('C:/E-Commerce-Personalized-Shopping-with-Expert-System/backend/recsys/res/model.pkl', 'rb'))
-    distance, suggestion = nn_model.kneighbors(
-        p_t.iloc[product_id, :].values.reshape(1, -1), n_neighbors=5)
+#     # my_model = pickle.load(open('C:/E-Commerce-Personalized-Shopping-with-Expert-System/backend/recsys/res/model.pkl', 'rb'))
+#     distance, suggestion = nn_model.kneighbors(
+#         p_t.iloc[product_id, :].values.reshape(1, -1), n_neighbors=5)
 
-    for i in suggestion[0]:
-        if df_data['product_id'][i]!=p_id:
-            ids.append(df_data.iloc[i].to_dict())
+#     for i in suggestion[0]:
+#         if df_data['product_id'][i]!=p_id:
+#             ids.append(df_data.iloc[i].to_dict())
     
-    return ids
+#     return ids
 @app.get('/popular')
 def popular():
     ratings=[]

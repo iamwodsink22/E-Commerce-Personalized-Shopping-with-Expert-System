@@ -13,6 +13,7 @@ import { FILTERPRODUCT, SETPRODUCT, selectSearchProd } from 'redux/productReduce
 
 const Search = () => {
     const filteredp=useSelector(selectSearchProd)
+    const [loading,setloading]=useState(false)
     const {query}=useParams()
     const [search,setsearch]=useState(query)
     const [contextsearch,setcontextsearch]=useState('true')
@@ -32,14 +33,18 @@ const Search = () => {
     }
 
 const x=async()=>{
+       
         const results:any=await axios.get(`http://127.0.0.1:4000/search/${query}`)
         const result:Array<Object>= results.data.result
         setproduct(result)
         dispatch(SETPRODUCT(result))
         dispatch(FILTERPRODUCT({query,result,price,rating}))
+        
     }
 useEffect(()=>{
+   setloading(true)
    x()
+   setloading(false)
     
 
 
@@ -114,7 +119,7 @@ const handleKey=(e:any)=>{
 
     </Card>
     <Card sx={{width:'65vw',ml:'5vw'}}>
-        <H2 ml='1vh' mt='1vh'>Showing {filteredp.length} results for '{query}'</H2>
+        <H2 ml='1vh' mt='1vh'>{loading?'Loading...':`Showing ${filteredp.length} results for ${query}`}</H2>
         {filteredp.map((item:any,index:Number)=>{
             return(
              <ProductDetails product={item}/>

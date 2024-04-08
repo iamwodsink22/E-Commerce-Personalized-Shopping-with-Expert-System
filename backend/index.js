@@ -11,12 +11,13 @@ const bp = require("body-parser");
 const path = require("path");
 const app = express();
 const transactionRoute= require('./routes/transaction.js');
+const recRoute=require('./routes/recs.js')
 
 dotenv.config();
 
 mongoose
   .connect(
-    "mongodb+srv://arakshapuri22:Puri%40222@cluster0.4xhrtiw.mongodb.net/?retryWrites=true&w=majority"
+    "mongodb://localhost:27017"
   )
   .then(() => {
     console.log("Connection To DB successful");
@@ -39,6 +40,7 @@ app.use("/api/users", userRoute);
 app.use("/api/payment", paymentRoute);
 app.use('/api/cart',cartRoute);
 app.use('/api/transaction', transactionRoute);
+app.use('/api/recs', recRoute);
 
 app.listen(process.env.PORT || 8000, () => {
   console.log("Listening to port 8000");

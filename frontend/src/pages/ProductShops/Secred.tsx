@@ -46,6 +46,7 @@ const Secred:FC<RecommendedProps> = ({products,title,colour}:any) => {
   const handleView=(id:number)=>{
     navigate(`view-product/${id}`)
   }
+  console.log(products)
   return (
     <Box sx={{backgroundColor:'white',marginTop:'8.3vw'}}>
     <H3 sx={{color:'black',ml:'1vw'}}>{title}</H3>
@@ -70,7 +71,7 @@ const Secred:FC<RecommendedProps> = ({products,title,colour}:any) => {
             
             
                 <Card sx={{display:'inline-grid', justifyContent:'center',marginRight:'1vw',marginBottom:'1vw',height:'24vh',width:'10vw',boxShadow:'2px 2px 2px 2px black',backgroundColor:'lightslategrey',borderRadius:'1vh',cursor:'pointer'}}onClick={()=>handleView(item.product_id)}>
-                     <span style={{maxWidth:'100px',maxHeight:'100px',marginTop:'10px',marginLeft:'3vh'}}><img src={item.img_link} alt="Men Keds" width="100px" height='100px' /></span>
+                     <span style={{maxWidth:'100px',maxHeight:'100px',marginTop:'10px',marginLeft:'3vh'}}><img src={item?.img_link?item.img_link:'/static/noimage.jpg'} alt="Men Keds" width="100px" height='100px'  /></span>
 
 <Box display="flex"flexDirection='column' ml="0.5rem" mr='2vw' mt='0.5vh'>
   <Small>{item.brand}</Small>
@@ -83,9 +84,9 @@ const Secred:FC<RecommendedProps> = ({products,title,colour}:any) => {
     />
   <H4 fontWeight={600} ml='5vh'>Rs {Math.ceil(item.discounted_price*120)}</H4>
 </Box>
-                </Card>
+          </Card>
               
-            ))}
+        ))}
            
         </Box>
        

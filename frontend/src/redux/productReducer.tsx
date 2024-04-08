@@ -63,7 +63,7 @@ export const getPRecProduct = createAsyncThunk(
     async (id:number, thunkAPI:any) => {
       try {
         
-        const res= await axios.get(`http://127.0.0.1:4000/getrecs/${id}`)
+        const res= await axios.get(`http://localhost:8000/api/recs/get/${id}`)
         
        
         const c_recs=res.data.recs
@@ -108,7 +108,7 @@ createAsyncThunk(
     async (_,thunkAPI:any) => {
       try {
         
-        const res=await axios.get('http://localhost:8000/api/products/getcategory',{params:{category:"Sports & Outdoors "}})
+        const res=await axios.get('http://localhost:8000/api/products/getcategory',{params:{category:"Smartwatches"}})
         
         return res.data
       } catch (error:any) {
@@ -127,7 +127,7 @@ export const getElecProduct = createAsyncThunk(
     async (_, thunkAPI:any) => {
       try {
         
-        const res=await axios.get('http://localhost:8000/api/products/getcategory',{params:{category:"Toys & Games "}})
+        const res=await axios.get('http://localhost:8000/api/products/getcategory',{params:{category:"Books"}})
        
         return res.data
       } catch (error:any) {
@@ -146,7 +146,7 @@ export const getHomeProduct = createAsyncThunk(
     async (_, thunkAPI:any) => {
       try {
        
-        const res=await axios.get('http://localhost:8000/api/products/getcategory',{params:{category:"Clothing, Shoes & Jewelry "}})
+        const res=await axios.get('http://localhost:8000/api/products/getcategory',{params:{category:"Shoes | Boots | Slippers | Sandals"}})
         
         return res.data
       } catch (error:any) {

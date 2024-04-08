@@ -81,9 +81,9 @@ const mostpopular:any=useSelector<any>(selectPopular)
       
      
       </div>
-      <Box marginTop={'10vh'}><CatBox  title={"Sports and Outdoor"}/>
-      <CatBox title={"Toys and Games"}/>
-      <CatBox title={"Clothing, Shoes and Jewellery"}/></Box>
+      <Box marginTop={'10vh'}><CatBox  title={"Smart Watches"}/>
+      <CatBox title={"Shoes and Slippers"}/></Box>
+      <CatBox title={"Books"}/>
       
       {history.length==0?(<Secred products={mostpopular}
        title={'Most Popular Products'} colour={'#cccccc'}/>):(<Secred products={personalizedProducts}

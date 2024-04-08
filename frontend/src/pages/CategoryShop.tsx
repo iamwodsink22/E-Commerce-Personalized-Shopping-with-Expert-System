@@ -15,20 +15,20 @@ const CategoryShop = () => {
     
     const {title}=useParams()
     const navigate=useNavigate()
-    const sports=useSelector(selectTechproduct)
-    const toys=useSelector(selectElecproduct)
-    const Jewellery=useSelector(selectHomeproduct)
+    const watches=useSelector(selectTechproduct)
+    const books=useSelector(selectElecproduct)
+    const shoes=useSelector(selectHomeproduct)
 
 useEffect(()=>{
-    if(title==='Sports and Outdoor'){
-        setproducts(sports)
+    if(title==='Smart Watches'){
+        setproducts(watches)
     }
     else{
-      if(title==='Toys and Games'){
-      setproducts(toys)
+      if(title==='Books'){
+      setproducts(books)
   }
   else{
-      setproducts(Jewellery)
+      setproducts(shoes)
   }
 }
 },[title])
@@ -39,7 +39,7 @@ const handleView=(id:number)=>{
     console.log(products)
   return (
     <Box>
-      <img style={{height:'20vw',width:'100%'}}src={`static/${title}.png`}/>
+      <img style={{height:'20vw',width:'100%'}}src={`/static/${title}.jpg`}/>
       <Box display={'flex'} mt='2vw'>
 
       <H3 style={{fontFamily:'Poppins', marginLeft:'2vw', fontSize:'20px'}}>{title}</H3>
