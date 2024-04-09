@@ -10,10 +10,13 @@ import { useNavigate } from 'react-router'
 
 import { Summary,SummaryItem,SummaryTitle } from './Cart'
 import HistoryDetails from './ProductShops/HistoryDetails'
+import axios from 'utils/axios'
+import { getPureHistory, selectPureHist } from 'redux/productReducer'
 
 const History = () => {
     const {user}=useAuth()
     const [clearedhistory,setclearedhistory]=useState(true)
+    const[purehist,setpurehist]=useState()
     
     const navigate=useNavigate()
     useTitle("History")
@@ -21,16 +24,18 @@ const History = () => {
     const dispatch=useDispatch<any>()
     
     
-    const history=useSelector(selectHistory)
     useEffect(()=>{
-        dispatch(getHistory(id))
-        
-    },[dispatch])
+      dispatch(getHistory(id))
+      dispatch(getPureHistory(id))
+      
+    },[])
+    const history=useSelector(selectHistory)
+    const purehistory=useSelector(selectPureHist)
     const total=history.reduce(function(p:number,n:any){
         return p+Number(n.discounted_price)
     },0)
-    const rating=history.reduce(function(p:number,n:any){
-        return p+Number(n.ratings)
+    const rating=purehistory.reduce(function(p:number,n:any){
+        return p+Number(n.rating)
     },0)
     
     const handleClear=()=>{
@@ -44,7 +49,7 @@ const History = () => {
 {clearedhistory?(<Box display={'flex'}>
     <Box width={"70vw"}>
 
-        {history.map((item:any,index:number)=>{return(<HistoryDetails product={item} />)})}
+        {history.map((item:any,index:number)=>{return(<HistoryDetails product={item} rating={purehistory[index].rating} />)})}
         </Box>
         <Summary style={{fontFamily:'Poppins', backgroundColor:'#F8F8F8', color:'black', marginLeft:'-3vw', height:'45vh'}}>
             <SummaryTitle style={{fontWeight:'bold'}}>Statistics</SummaryTitle>

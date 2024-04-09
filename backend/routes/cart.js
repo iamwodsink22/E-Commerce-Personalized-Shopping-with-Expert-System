@@ -45,7 +45,7 @@ router.get('/getcart/:email',async(req,res)=>{
     product_id_arr=[]
     fullProducts=[]
     const allProduct= await Cart.find({email:req.params.email})
-    product_ids=allProduct[0].products
+    product_ids=allProduct[0]?.products
     for(i=0;i<product_ids.length;i++){
         
      product_id_arr.push(product_ids[i].product_id)
@@ -60,8 +60,17 @@ router.get('/getcart/:email',async(req,res)=>{
     return res.status(200).json(fullProducts)
 })
 
-router.delete('/removefromcart',(req,res)=>{
-     Cart.findOneAndDelete(email=req.body.email,product_id=req.body.product_id)
-     return res.status(200)
+router.delete('/removefromcart',async(req,res)=>{
+    console.log("delete cart")
+     const {mail,product_id}=req.query
+     const myCart=await Cart.findOne({email:mail})
+     let newCartProducts=[...myCart['products']]
+     console.log(newCartProducts)
+     list = newCartProducts.filter(item => item.product_id !== product_id);
+     console.log(list)
+     const newCart=new Cart({email:mail,products:list})
+     await Cart.findOneAndDelete({email:mail})
+     const savedCart=await newCart.save()
+     return res.status(200).json(savedCart)
 })
 module.exports=router

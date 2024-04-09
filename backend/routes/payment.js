@@ -10,7 +10,7 @@ const { request } = require('express');
 const router = require("express").Router();
 router.post("/initiate", async (req, res) => {
 const message=`total_amount=${req.body['total_amount']},transaction_uuid=${req.body['transaction_uuid']},product_code=${req.body['product_code']}`
-console.log(message)
+
 const secret='8gBm/:&EnhH.1/q'
 var hash = CryptoJS.HmacSHA256(message, secret);
 var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);

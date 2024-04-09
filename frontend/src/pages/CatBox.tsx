@@ -13,7 +13,6 @@ products:any
 }
 
 const CatBox:FC<Catprops> = ({title,products}) => {
-    console.log("hello")
     
     const navigate=useNavigate()
 

@@ -4,12 +4,20 @@ import { Span } from 'components/Typography'
 import { Card, Rating } from '@mui/material';
 import { Product,ProductDetail,ProductAmount,Details,PriceDetail,ProductPrice,ProductColor,ProductAmountContainer } from 'pages/Cart';
 import { useNavigate } from 'react-router';
-
+import useAuth from 'hooks/useAuth';
+import axios from 'utils/axios';
+import toast from 'react-hot-toast';
 interface ProductProps{
     product:any
 }
 const ProductDetails:FC<ProductProps> = ({product}) => {
   const navigate=useNavigate()
+  const {user}=useAuth()
+  const removeCart=async()=>{
+    const ob={mail:user?.email,product_id:product.product_id}
+  const a=await axios.delete(`/cart/removefromcart/?mail=${user?.email}&product_id=${product.product_id}`)
+  toast.success("Removed Item from Cart")
+  }
   
   return (
     <Card sx={{pl:'2vw',mb:'1vh',cursor:'pointer'}} onClick={()=>navigate(`/dashboard/view-product/${product.product_id}`)}>
@@ -41,7 +49,7 @@ const ProductDetails:FC<ProductProps> = ({product}) => {
                   <Remove />
                   <ProductAmount style={{marginLeft:'3vw', fontFamily:'Poppins', fontSize:'20px', color:'grey'}}>Rs{(product.discounted_price*120).toFixed(0)}</ProductAmount>
                   <ProductPrice style={{marginLeft:'3vw', fontFamily:'Poppins', color:'black', fontWeight:'550'}}>Rs{(product.discounted_price*105).toFixed(0)}</ProductPrice>
-                  <img style={{marginLeft:'3vw'}} width={'45vw'} src='https://cdn.iconscout.com/icon/free/png-256/free-remove-320-451046.png' alt="" />
+                  <img style={{marginLeft:'3vw'}} width={'45vw'} src='https://cdn.iconscout.com/icon/free/png-256/free-remove-320-451046.png' alt="" onClick={()=>removeCart()} />
                   
                 </ProductAmountContainer>
                 

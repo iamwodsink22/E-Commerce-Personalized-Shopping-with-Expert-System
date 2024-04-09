@@ -4,11 +4,24 @@ import { Span } from 'components/Typography'
 import { Card } from '@mui/material';
 import { Product,ProductDetail,ProductAmount,Details,PriceDetail,ProductPrice,ProductColor,ProductAmountContainer } from 'pages/Cart';
 import {Rating} from '@mui/material'
+import axios from 'utils/axios';
+import toast from 'react-hot-toast';
+import useAuth from 'hooks/useAuth';
 
 interface HistoryProps{
-    product:any
+    product:any,
+    rating:number
 }
-const HistoryDetails:FC<HistoryProps> = ({product}) => {
+const HistoryDetails:FC<HistoryProps> = ({product,rating}) => {
+  const {user}=useAuth()
+  const handleChange=async(n:any)=>{
+    const res=await axios.put(`/transaction/rate/${user?.usr_id}`,{product_id:product.product_id,rating:n} )
+    if(res.status==200){
+    
+    toast.success("Product rated successfully")
+    }
+    
+  }
   
   return (
     <Card sx={{pl:'2vw',mb:'1vh', width:'64vw'}}>
@@ -29,7 +42,9 @@ const HistoryDetails:FC<HistoryProps> = ({product}) => {
                   <Rating
     name="simple-controlled"
     size="medium"
-    defaultValue={product.rating}
+    defaultValue={rating}
+    value={rating}
+    onChange={(e,n)=>handleChange(n)}
     sx={{ my: "5px" }}
     style={{marginLeft:'1vw'}}
     />

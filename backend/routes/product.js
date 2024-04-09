@@ -10,7 +10,6 @@ const router = require("express").Router();
 
 
 router.post("/createproduct", async (req, res) => {
-  console.log(req.body.category);
   x = req.body.category;
   x = x.replace("]", "");
   x = x.replace("[", "");
@@ -60,7 +59,7 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 
 router.get("/find/:id", async (req, res) => {
   try {
-    console.log("Hello");
+   
     console.log(`'${req.params.id}'`);
     const product = await Products.find({ product_id: req.params.id });
     
@@ -72,7 +71,7 @@ router.get("/find/:id", async (req, res) => {
 
 router.get("/getcategory", async (req, res) => {
   const qCategory = req.query.category;
-  console.log(qCategory)
+ 
   
 
   try {

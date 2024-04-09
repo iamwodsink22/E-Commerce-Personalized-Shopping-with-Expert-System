@@ -14,7 +14,7 @@ import NotificationsPopover from "../popovers/NotificationsPopover";
 import ProfilePopover from "../popovers/ProfilePopover";
 import ServicePopover from "../popovers/ServicePopover";
 import SearchProduct from "./SearchProduct";
-
+import Sell from "./Sell";
 // root component interface
 
 
@@ -76,8 +76,8 @@ const DashboardNavbar: FC = (
         >
           {name}
         </H2>
-        <SearchProduct/>
-        
+        {/* <SearchProduct/> */}
+        <Sell/>
         
 
         {/* <Box flexGrow={1} mr={0} /> */}

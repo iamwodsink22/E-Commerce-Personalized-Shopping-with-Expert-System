@@ -14,6 +14,7 @@ const initialState={
     homeproducts:new Array(),
     elecproducts:new Array(),
     popular:new Array(),
+    purehist:new Array(),
 
     product:{}
 }
@@ -47,6 +48,27 @@ export const getRecProduct = createAsyncThunk(
         const c_recs=res.data.rec
         const i_recs=res.data.i_rec
         return {c_recs,i_recs}
+      } catch (error:any) {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        return thunkAPI.rejectWithValue(message);
+      }
+    }
+  );
+export const getPureHistory = createAsyncThunk(
+    "/products/getpurehist",
+    async (id:number, thunkAPI:any) => {
+      try {
+        
+        const res= await axios.get(`http://localhost:8000/api/transaction/purehistory/${id}`)
+        
+       
+        
+        return res.data
       } catch (error:any) {
         const message =
           (error.response &&
@@ -255,6 +277,11 @@ const productSlice=createSlice({name:"product",initialState,reducers:{
     })
     .addCase(getPopular.fulfilled,(state,action:any)=>{
       state.popular=action.payload
+    }).addCase(getPureHistory.fulfilled,(state,action:any)=>{
+      state.purehist=action.payload
+    })
+    .addCase(getPureHistory.rejected,(state,action:any)=>{
+      state.loading=true
     })
 },})
 export const { SETPRODUCT,FILTERPRODUCT } =
@@ -268,5 +295,7 @@ export const selectTechproduct = (state:any) => state.product.techproducts;
 export const selectHomeproduct = (state:any) => state.product.homeproducts;
 export const selectElecproduct = (state:any) => state.product.elecproducts;
 export const selectPProduct=(state:any)=>state.product.precproducts
+export const selectPureHist=(state:any)=>state.product.purehist
+
 
 export default productSlice.reducer;

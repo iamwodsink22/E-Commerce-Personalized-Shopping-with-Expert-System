@@ -36,11 +36,6 @@ const ImgContainer = styled(Box)(()=>({
 }))
  
 
-// const Image = styled(img)
-//   
-//   // ${mobile({ height: "40vh" })}
-// `;
-
 const InfoContainer = styled(Box)(()=>({
   flex: 1,
   padding: '0px 20px',
@@ -48,19 +43,6 @@ const InfoContainer = styled(Box)(()=>({
   // ${mobile({ padding: "10px" })}
 }))
  
-
-// const Title = styled.h1`
-//   font-weight: 200;
-// `;
-
-// const Desc = styled.p`
-//   margin: 20px 0px;
-// `;
-
-// const Price = styled.span`
-//   font-weight: 100;
-//   font-size: 40px;
-// `;
 
 const FilterContainer = styled(Box)(()=>({
   width: '50%',
@@ -90,15 +72,6 @@ const FilterColor = styled(Box)(()=>({
   cursor: 'pointer',
 }))
  
-
-
-// const FilterSize = styled.select`
-//   margin-left: 10px;
-//   padding: 5px;
-// `;
-
-// const FilterSizeOption = styled.option``;
-
 const AddContainer = styled(Box)(()=>({
   width: '50%',
   display: 'flex',
@@ -119,28 +92,7 @@ const AmountContainer = styled(Box)(()=>({
   
 
 
-// const Amount = styled.span`
-//   width: 30px;
-//   height: 30px;
-//   border-radius: 10px;
-//   border: 1px solid teal;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   margin: 0px 5px;
-// `;
 
-// const Button = styled.button`
-//   padding: 15px;
-//   border: 2px solid teal;
-//   background-color: white;
-//   cursor: pointer;
-//   font-weight: 500;
-
-//   &:hover{
-//       background-color: #f8f4f4;
-//   }
-// `;
 
 const Product = () => {
     const dispatch=useDispatch<any>()
@@ -148,14 +100,14 @@ const Product = () => {
     const { logout, user } = useAuth();
     const product=useSelector(selectProduct)
     const rec=useSelector(selectCRecproduct)
-    const irec=useSelector(selectIRecproduct)
+   
     
     const {id}:any=useParams()
     
     
     const navigate=useNavigate()
     const handlePayment=async(x:any)=>{
-      
+    const uuid=crypto.randomUUID()
      
      
       const data_raw={
@@ -169,7 +121,7 @@ const Product = () => {
         "success_url": `http://localhost:3000/dashboard/view-product/${id}`,
         "tax_amount": 0,
         "total_amount":Math.ceil(product.discounted_price*120),
-        "transaction_uuid": crypto.randomUUID()
+        "transaction_uuid": uuid
         }
     const newt=await axios.post('http://localhost:8000/api/payment/initiate',data_raw)
     const newP=newt.data
@@ -193,11 +145,12 @@ const Product = () => {
      
      document.body.appendChild(form)
      form.submit()
+     const done=await axios.post('http://localhost:8000/api/transaction/add',{user_id:user?.usr_id,product_id:id,rating:product.ratings,timestamp:Date.now()})
+     console.log(done)
       }
       
   useEffect(()=>{
    dispatch(getProduct(id))
-   dispatch(getRecProduct(id))
   },[dispatch,id])
       useTitle("View Product")
       const handleCart=()=>{
@@ -257,28 +210,7 @@ objectFit: 'cover',boxShadow:'rgba(0, 0, 0, 0.24) 0px 3px 8px'}} src={product.im
           <Box><ExpandableParagraph text = {product?.about_product}  maxLength={300} /></Box>
           
           
-          {/* <FilterContainer>
-            <Filter>
-              <span style={{fontSize: '20px',
-  fontWeight: '200'}}>Color</span>
-              <FilterColor color="black" />
-              <FilterColor color="darkblue" />
-              <FilterColor color="gray" />
-            </Filter> */}
-            {/* <Filter>
-              <H4>Size</H4>
-              <FormControl>
-
-               <Select>
-                <SelectInput value={'SX'}>XS</SelectInput>
-                <SelectInput>S</SelectInput>
-                <SelectInput>M</SelectInput>
-                <SelectInput>L</SelectInput>
-                <SelectInput>XL</SelectInput>
-              </Select>
-            
-            </Filter> */}
-          {/* </FilterContainer> */}
+          
           
           </InfoContainer>
 <Box position={'relative'} left='10vw' marginTop={'10vh'}>
