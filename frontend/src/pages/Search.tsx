@@ -42,14 +42,16 @@ const x=async()=>{
         
     }
 useEffect(()=>{
-   setloading(true)
+  setloading(true)
    x()
-   setloading(false)
-    
-
-
+   setTimeout(() => {
+    setloading(false);
+  }, 2000)
+   
+   
+   
 },[query,price,rating])
-
+console.log(filteredp)
 const handleSearch=()=>{
 navigate(`/dashboard/search/${search}`)
 }

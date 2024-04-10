@@ -46,6 +46,7 @@ router.get('/getcart/:email',async(req,res)=>{
     fullProducts=[]
     const allProduct= await Cart.find({email:req.params.email})
     product_ids=allProduct[0]?.products
+    if(product_ids){
     for(i=0;i<product_ids.length;i++){
         
      product_id_arr.push(product_ids[i].product_id)
@@ -57,7 +58,10 @@ router.get('/getcart/:email',async(req,res)=>{
     
     }
     
-    return res.status(200).json(fullProducts)
+    return res.status(200).json(fullProducts)}
+    else{
+        return res.status(400)
+    }
 })
 
 router.delete('/removefromcart',async(req,res)=>{

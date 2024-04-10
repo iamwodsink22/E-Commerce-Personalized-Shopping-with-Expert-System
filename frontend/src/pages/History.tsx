@@ -42,6 +42,7 @@ const History = () => {
         dispatch(clearHistory(id))
         setclearedhistory(false)
     }
+    console.log(purehistory)
   return (
     <Box>
 

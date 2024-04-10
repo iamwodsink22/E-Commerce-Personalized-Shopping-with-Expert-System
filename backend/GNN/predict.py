@@ -11,11 +11,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from  backend.GNN.sentence_transformer import SentenceTransformer,mean_pooling,my_model,tokenizer
 import numpy as np
 sentence_transformer=SentenceTransformer(my_model)
-sentence_transformer.load_weights('D:/Ecommerce/backend/GNN/sent/weights')
-loaded_emb=np.load('D:/Ecommerce/backend/GNN/sent/embeddings.npz')
+sentence_transformer.load_weights('D:/Ecommerce/backend/GNN/sent/Wweights')
+loaded_emb=np.load('D:/Ecommerce/backend/GNN/sent/newembeddings.npz')
 embedding_arr=np.array(loaded_emb['arr_0'])
 embedding_arr=embedding_arr.reshape(-1,embedding_arr.shape[2])
-products=np.load('D:/Ecommerce/backend/GNN/sent/product_titles.npz')
+products=np.load('D:/Ecommerce/backend/GNN/sent/newproduct_titles.npz')
 product_arr=np.array(products['arr_0'])
 
 

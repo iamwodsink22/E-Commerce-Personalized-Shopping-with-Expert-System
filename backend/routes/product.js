@@ -95,4 +95,13 @@ router.get("/getpopular",async(req,res)=>{
   list.sort((a, b) => b["ratings"] - a["ratings"]);
   return  res.status(200).json({'popular':list.slice(0, 15)});
 })
+
+router.get("/getallproduct",async(req,res)=>{
+  const originalArray=await Products.find({})
+  let newArray = originalArray.slice(500, 1000)
+    .concat(originalArray.slice(16000, 16500))
+    .concat(originalArray.slice(26500, 27000))
+    .concat(originalArray.slice(38000, 38500));
+  return res.status(200).json(newArray)
+})
 module.exports = router;

@@ -264,6 +264,7 @@ const productSlice=createSlice({name:"product",initialState,reducers:{
     .addCase(getElecProduct.fulfilled,(state,action:any)=>{
         
         state.elecproducts=action.payload
+        
        
     })
     .addCase(getPRecProduct.pending,(state,action:any)=>{
