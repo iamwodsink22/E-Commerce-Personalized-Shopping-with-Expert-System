@@ -13,7 +13,7 @@ const Welcome = () => {
         <ul style={{ position:'relative',right:'35vw',display:'flex',justifyContent:'center',alignItems:'center',listStyleType:'none'}}>
           
             <li style={{margin:'0 5vw'}}>
-              <Link style={{textDecoration:'none',color:'white',fontFamily:'"Poppins",sans-serif'}} to="/sell">Start Selling</Link>
+              <Link style={{textDecoration:'none',color:'white',fontFamily:'"Poppins",sans-serif'}} to="/dashboard">Dashboard</Link>
             </li>
          
             <li style={{margin:'0 3vw'}}>
@@ -38,7 +38,14 @@ const Welcome = () => {
         <div className="hero-text" style={{marginBottom:'2rem',width:'30%',color:'#2c2d2d',marginTop:'5vh',fontFamily:'"Poppins",sans-serif'}}>
           <h2>Personalized Shopping with Ecommerce</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab aperiam eos perspiciatis nihil optio ut alias vero incidunt porro facere quis, mollitia quaerat. Possimus molestiae architecto rem saepe ab labore!
+          Welcome to Personalized Ecommerce, where every product is curated just for you! Enjoy a seamless shopping experience with personalized recommendations and exclusive deals. We're here to make your shopping journey delightful and uniquely yours!
+
+
+
+
+
+
+
           </p>
         </div>
 
@@ -64,7 +71,7 @@ const Welcome = () => {
           }}
           
         >
-          <Link style={{color:'white',textDecoration:'none'}} to="/shop">Start Shopping</Link>
+          <Link style={{color:'white',textDecoration:'none'}} to="/dashboard">Start Shopping</Link>
         </button>
       </div>
     </Box>
