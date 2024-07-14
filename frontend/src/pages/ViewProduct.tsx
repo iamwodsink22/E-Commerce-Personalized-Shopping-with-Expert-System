@@ -7,10 +7,6 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import FlexBox from 'components/FlexBox';
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
 import useTitle from 'hooks/useTitle'
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 

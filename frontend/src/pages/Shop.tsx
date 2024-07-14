@@ -1,16 +1,10 @@
 import { Theme } from '@emotion/react'
 import { Box, styled,Rating } from '@mui/material'
 import FlexBox from 'components/FlexBox'
-import {  Small } from 'components/Typography'
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
 import CatBox from './CatBox';
 // Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+
 import useTitle from 'hooks/useTitle'
 import React,{FC,Fragment,useEffect,useState} from 'react'
 // import SearchProduct from './SearchProduct';
