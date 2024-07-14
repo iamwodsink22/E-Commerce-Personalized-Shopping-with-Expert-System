@@ -230,23 +230,23 @@ var form=document.createElement('form')
     <Box >
       
       <Wrapper>
-        <Title>My Cart</Title>
+        <Title style={{fontFamily:'Poppins'}}>My Cart</Title>
         <Top>
           <Button style={{fontFamily:'Poppins', fontSize:'16px'}} onClick={()=>navigate('/dashboard/shop')}>CONTINUE SHOPPING</Button>
           <TopText>
-            <TopText>Shopping Bag(2)</TopText>
-            <TopText>Your Wishlist (0)</TopText>
+            <TopText style={{fontFamily:'Poppins'}}>Shopping Bag(2)</TopText>
+            <TopText style={{fontFamily:'Poppins'}}>Your Wishlist (0)</TopText>
           </TopText>
           <Button variant="outlined" >CHECKOUT NOW</Button>
         </Top>
         <Bottom>
-          <div style={{}}>
+          <div style={{width:'65vw'}}>
             <Box display={'flex'}>
               <p style={{marginLeft:'0.75vw', fontFamily:'Poppins', fontWeight:'bold', fontSize:'16px'}}>Product Details</p>
-              <p style={{marginLeft:'27vw', fontFamily:'Poppins', fontWeight:'bold', fontSize:'16px'}}>Quantity</p>
-              <p style={{marginLeft:'4vw', fontFamily:'Poppins', fontWeight:'bold', fontSize:'16px'}}>Price</p>
-              <p style={{marginLeft:'4vw', fontFamily:'Poppins', fontWeight:'bold', fontSize:'16px'}}>Total</p>
-              <p style={{marginLeft:'3vw', fontFamily:'Poppins', fontWeight:'bold', fontSize:'16px'}}>Remove</p>
+              {/* <p style={{marginLeft:'27vw', fontFamily:'Poppins', fontWeight:'bold', fontSize:'16px'}}>Quantity</p> */}
+              <p style={{marginLeft:'27vw', fontFamily:'Poppins', fontWeight:'bold', fontSize:'16px'}}>Original Price</p>
+              <p style={{marginLeft:'3vw', fontFamily:'Poppins', fontWeight:'bold', fontSize:'16px', marginRight:'7vw'}}>Discounted price</p>
+              {/* <p style={{marginLeft:'1vw', fontFamily:'Poppins', fontWeight:'bold', fontSize:'16px'}}>Remove</p> */}
             </Box>
                       <Info style={{}}>
           {cart.map((item:any,index:number)=>{return(<ProductDetails product={item}/>)})}
@@ -258,20 +258,20 @@ var form=document.createElement('form')
             <SummaryTitle style={{fontWeight:'bold', alignItems:'left'}}>ORDER SUMMARY</SummaryTitle>
             <hr />
             <SummaryItem>
-              <Span width={'15vw'}>Subtotal</Span>
-              <Span>$ {Math.floor(total)}</Span>
+              <Span width={'12vw'} style={{fontFamily:'Poppins', fontWeight:'bold'}}>Subtotal</Span>
+              <Span>Rs {Math.floor(total)*120}</Span>
             </SummaryItem>
             <SummaryItem>
-              <Span width={'15vw'}>Estimated Shipping</Span>
-              <Span> $</Span>
+              <Span width={'14vw'} style={{fontFamily:'Poppins', fontWeight:'bold'}}>Estimated Shipping</Span>
+              <Span> Rs 100</Span>
             </SummaryItem>
-            <SummaryItem>
+            {/* <SummaryItem>
               <Span width={'15vw'}>Shipping Discount</Span>
               <Span>{}</Span>
-            </SummaryItem>
+            </SummaryItem> */}
             <SummaryItem sx={{mb:1}}>
-              <Span width={'15vw'}>Total</Span>
-              <Span>${Math.floor(total)}</Span>
+              <Span width={'12vw'} style={{fontFamily:'Poppins', fontWeight:'bold'}}>Total</Span>
+              <Span>Rs {(Math.floor(total)*120) +100}</Span>
             </SummaryItem>
             <Button sx={{ml:'6vw',':hover':{color:'#5783db', backgroundColor:'white', border:'solid 1px #5783db', transition:'0.6s'}}} style={{marginTop:'2vh', alignSelf:'center', width:'100%', marginLeft:'0vw', height:'7vh', backgroundColor:'#5783db', color: 'white', cursor:'pointer', fontSize:'18px'}} variant='outlined' onClick={()=>handlePayment()} >CHECKOUT NOW</Button>
           </Summary>

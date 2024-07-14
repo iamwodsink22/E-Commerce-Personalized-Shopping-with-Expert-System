@@ -27,8 +27,8 @@ const HistoryDetails:FC<HistoryProps> = ({product,rating}) => {
     <Card sx={{pl:'2vw',mb:'1vh', width:'64vw'}}>
     <Product>
               <ProductDetail>
-                <div style={{width:'150px', backgroundColor:'white', justifyContent:'center', borderRight:'1px solid #E3E3E3', margin:'1vh 0vh 1vh 0vh'}}>
-                  <img style={{width:'auto',height:'130px', marginTop:'2vh', position:'relative'}} src={product.img_link} alt="hello" />
+                <div style={{width:'200px', backgroundColor:'white', justifyContent:'center', borderRight:'1px solid #E3E3E3', margin:'1vh 0vh 1vh 0vh'}}>
+                  <img style={{width:'auto',height:'130px', marginTop:'2vh'}} src={product.img_link} alt="hello" />
                   </div>
                   
                 
@@ -37,7 +37,7 @@ const HistoryDetails:FC<HistoryProps> = ({product,rating}) => {
                     {/* <b>Product:</b>  */}
                     {product.product_name}
                   </Span>
-                  <ProductAmount style={{marginLeft:'1vw', fontFamily:'Poppins', fontSize:'20px', color:'grey'}}>${product.discounted_price}</ProductAmount>
+                  <ProductAmount style={{marginLeft:'1vw', fontFamily:'Poppins', fontSize:'20px', color:'grey'}}>Rs{(product.discounted_price*105).toFixed(2)}</ProductAmount>
                   <p style={{marginLeft:'1vw', fontFamily:'Poppins'}}>QTY <span style={{marginLeft:'1vw'}}>{1}</span></p>
                   <Rating
     name="simple-controlled"

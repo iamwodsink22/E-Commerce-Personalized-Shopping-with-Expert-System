@@ -10,7 +10,7 @@ def execute_scripts():
     subprocess.call(["python", r"backend\GNN\Python Automation\predict.py"])
 
 schedule.every().day.at("12:25").do(execute_scripts)
-print("Felllo")
+
 
 while True:
     schedule.run_pending()

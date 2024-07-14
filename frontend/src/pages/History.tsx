@@ -65,11 +65,11 @@ const History = () => {
             </SummaryItem>
             <SummaryItem>
               <Span style={{width:'10vw', fontSize:'16px'}}>Loyalty Point : </Span>
-              <Span style={{fontSize:'15px'}}>0</Span>
+              <Span style={{fontSize:'15px'}}>{(history.length*total/10).toFixed(0)}</Span>
             </SummaryItem>
             <SummaryItem>
               <Span style={{width:'10vw', fontSize:'16px'}}>Total Amount : </Span>
-              <Span style={{fontSize:'15px'}}>Rs {(total*120).toFixed(2)}</Span>
+              <Span style={{fontSize:'15px'}}>Rs {(total*105).toFixed(2)}</Span>
             </SummaryItem>
             {/* <SummaryItem sx={{mb:1}}>
               <Span>Total</Span>

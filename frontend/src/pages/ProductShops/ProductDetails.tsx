@@ -20,7 +20,7 @@ const ProductDetails:FC<ProductProps> = ({product}) => {
   }
   
   return (
-    <Card sx={{pl:'2vw',mb:'1vh',cursor:'pointer'}} onClick={()=>navigate(`/dashboard/view-product/${product.product_id}`)}>
+    <Card sx={{pl:'2vw',mb:'1vh'}} >
     <Product>
               <ProductDetail>
                 <div style={{width:'150px', backgroundColor:'white', justifyContent:'center', borderRight:'1px solid #E3E3E3', margin:'1vh 0vh 1vh 0vh'}}>
@@ -28,7 +28,7 @@ const ProductDetails:FC<ProductProps> = ({product}) => {
                   </div>
                   
                 
-                <Details width={'20vw'} paddingLeft={'1vw'} style={{borderRight:'solid 1px #E3E3E3', margin:'1vh 0vw 1vh 0vw'}}>
+                <Details width={'20vw'} paddingLeft={'1vw'} style={{borderRight:'solid 1px #E3E3E3', margin:'1vh 0vw 1vh 0vw',cursor:'pointer'}} onClick={()=>navigate(`/dashboard/view-product/${product.product_id}`)} sx={{":hover":{color:'grey', transition:'0.6s', transform:'scale(1.01)'}}}>
                   <Span style={{marginLeft:'1vw', fontFamily:'Poppins', fontWeight:'500'}}>
                     {/* <b>Product:</b>  */}
                     {product.product_name}
@@ -43,12 +43,12 @@ const ProductDetails:FC<ProductProps> = ({product}) => {
                 </Details>
               </ProductDetail>
               <PriceDetail>
-                <ProductAmountContainer style={{marginLeft:'-6vw'}}>
-                  <Add />
+                <ProductAmountContainer style={{marginLeft:'-18vw'}}>
+                  {/* <Add />
                   <button>{product[product.id]}</button>
-                  <Remove />
+                  <Remove /> */}
                   <ProductAmount style={{marginLeft:'3vw', fontFamily:'Poppins', fontSize:'20px', color:'grey'}}>Rs{(product.discounted_price*120).toFixed(0)}</ProductAmount>
-                  <ProductPrice style={{marginLeft:'3vw', fontFamily:'Poppins', color:'black', fontWeight:'550'}}>Rs{(product.discounted_price*105).toFixed(0)}</ProductPrice>
+                  <ProductPrice style={{marginLeft:'5vw', fontFamily:'Poppins', color:'black', fontWeight:'550'}}>Rs{(product.discounted_price*105).toFixed(0)}</ProductPrice>
                   <img style={{marginLeft:'3vw'}} width={'45vw'} src='https://cdn.iconscout.com/icon/free/png-256/free-remove-320-451046.png' alt="" onClick={()=>removeCart()} />
                   
                 </ProductAmountContainer>

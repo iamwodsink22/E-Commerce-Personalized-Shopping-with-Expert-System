@@ -32,7 +32,9 @@ const Wrapper = styled(Box)(()=>({ padding: '50px',
 
 const ImgContainer = styled(Box)(()=>({
   width:'30vw',
-  flex: 1,
+  overflow:'hidden',
+  height:'40vh',
+  
 }))
  
 
@@ -112,13 +114,13 @@ const Product = () => {
      
       const data_raw={
         "amount": Math.ceil(product.discounted_price*120),
-        "failure_url": "https://google.com",
+        "failure_url": `http://localhost:3000/dashboard/view-product/${id}`,
         "product_delivery_charge": 0,
         "product_service_charge": 0,
         "product_code": "EPAYTEST",
         
         "signed_field_names": "total_amount,transaction_uuid,product_code",
-        "success_url": `http://localhost:3000/dashboard/view-product/${id}`,
+        "success_url":`http://localhost:3000/dashboard/view-product/${id}` ,
         "tax_amount": 0,
         "total_amount":Math.ceil(product.discounted_price*120),
         "transaction_uuid": uuid
@@ -172,9 +174,7 @@ const Product = () => {
       <Wrapper>
         
         <ImgContainer >
-          <img style={{width: '30vw',border: 'solid 1px #e3e3e3', borderRadius:'5px',
-height: '80vh',
-objectFit: 'cover',boxShadow:'rgba(0, 0, 0, 0.24) 0px 3px 8px'}} src={product.img_link} />
+          <img style={{width: '100%',height:'100%',border: 'solid 1px #e3e3e3', borderRadius:'5px',objectFit: 'cover',boxShadow:'rgba(0, 0, 0, 0.24) 0px 3px 8px'}} src={product.img_link} />
         </ImgContainer>
         <Box display={'block'} justifyContent={'center'} position={'absolute'} left='45vw'>
         <InfoContainer>
@@ -196,10 +196,10 @@ objectFit: 'cover',boxShadow:'rgba(0, 0, 0, 0.24) 0px 3px 8px'}} src={product.im
         <hr style={{color:'#4e4e4e', height: '3px'}}/>
 
         <Box paddingTop={'0.2vh'} paddingBottom={'1vh'}>
-          <span style={{fontFamily:'Poppins',fontSize:'3.5vh',color:'#5d5d5d', fontWeight:'bold', marginLeft:'0.3vw'}}><s>${Number(Number(product.discounted_price)+((5/100)*Number(product.discounted_price))).toPrecision(3)}</s></span>
+          <span style={{fontFamily:'Poppins',fontSize:'3.5vh',color:'#5d5d5d', fontWeight:'bold', marginLeft:'0.3vw'}}><s>Rs{(product.discounted_price*120).toFixed(2)}</s></span>
           &nbsp; &nbsp;  
-          <span style={{fontFamily:'Poppins',fontSize:'4vh', fontWeight:'bold'}}>${Number(product.discounted_price)}</span>
-          <p style={{fontFamily:'Poppins', fontSize:'2.1vh', fontWeight:'bold', marginTop:'0.4vh', color:'#4f4f4f'}}>You save:   <span style={{fontWeight:'normal'}}>${((Number(Number(product.discounted_price)+((5/100)*Number(product.discounted_price)))-Number(product.discounted_price))).toPrecision(1)}</span> </p>
+          <span style={{fontFamily:'Poppins',fontSize:'4vh', fontWeight:'bold'}}>Rs{(product.discounted_price*105).toFixed(2)}</span>
+          <p style={{fontFamily:'Poppins', fontSize:'2.1vh', fontWeight:'bold', marginTop:'0.4vh', color:'#4f4f4f'}}>You save:   <span style={{fontWeight:'normal'}}>Rs{(product.discounted_price*0.142*105).toFixed(2)}</span> </p>
           
         </Box>
         
