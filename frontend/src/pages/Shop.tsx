@@ -20,7 +20,7 @@ import React,{FC,Fragment,useEffect,useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getElecProduct, getHomeProduct, getTechProduct, selectElecproduct, selectHomeproduct, selectTechproduct,selectPProduct,getPRecProduct, selectPopular, getPopular } from 'redux/productReducer';
 import { getHistory,selectHistory } from 'redux/userReducer';
-import Secred from './ProductShops/Secred';
+
 import useAuth from 'hooks/useAuth';
 
 

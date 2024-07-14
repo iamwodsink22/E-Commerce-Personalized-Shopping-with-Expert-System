@@ -8,12 +8,12 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import FlexBox from 'components/FlexBox';
 
 import useTitle from 'hooks/useTitle'
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+
 
 
 import useAuth from "hooks/useAuth";
 
-import { Swiper, SwiperSlide } from 'swiper/react';
+
 import { productList } from './ProductList'
 import { useNavigate, useParams } from 'react-router';
 import { TypeSpecimenOutlined } from '@mui/icons-material';
@@ -22,7 +22,6 @@ import { ADD_CART, Add2Cart } from 'redux/cartReducer';
 import axios from 'axios';
 import { getProduct, getRecProduct, selectCRecproduct,selectIRecproduct, selectElecproduct, selectProduct } from 'redux/productReducer';
 import toast from 'react-hot-toast';
-import Secred from './ProductShops/Secred';
 
 
 const ViewProductWrapper=styled(Box)(()=>({
@@ -220,7 +219,7 @@ useEffect(()=>{
     </Box>
     
 
-<Secred products={irec}  title={'Users who liked this also liked'} colour={'#cccccc'}/>
+
     
     </ViewProductWrapper>
       
