@@ -17,7 +17,7 @@ dotenv.config();
 
 mongoose
   .connect(
-    "mongodb://localhost:27017"
+    process.env.MONGO_URL
   )
   .then(() => {
     console.log("Connection To DB successful");
