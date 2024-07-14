@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Welcome = () => {
   return (
-    // <Box width='100%' height='100%'>
+   
     <Box position={'absolute'} top={-2} left={'10vw'}>
         <nav style={{display:'flex',justifyContent:'space-between',alignItems:'center',paddingTop:'1.5rem',paddingBottom:'1.5rem'}} >
         <div>

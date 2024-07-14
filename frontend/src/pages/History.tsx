@@ -5,12 +5,12 @@ import { useDispatch,useSelector } from 'react-redux'
 import useTitle from 'hooks/useTitle'
 import { getHistory, selectHistory,clearHistory } from 'redux/userReducer'
 import useAuth from 'hooks/useAuth'
-import ProductDetails from './ProductShops/ProductDetails'
+
 import { useNavigate } from 'react-router'
 
 import { Summary,SummaryItem,SummaryTitle } from './Cart'
 import HistoryDetails from './ProductShops/HistoryDetails'
-import axios from 'utils/axios'
+
 import { getPureHistory, selectPureHist } from 'redux/productReducer'
 
 const History = () => {
