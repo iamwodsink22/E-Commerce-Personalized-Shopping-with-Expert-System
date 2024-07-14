@@ -24,7 +24,7 @@ const Sell = () => {
   const [searchResults, setSearchResults] = useState<any[]>([])
   useEffect(()=>{
     const fetchData = async() =>{
-      const {data} = await axios.get("http://localhost:8000/api/products/getallproduct");
+      const {data} = await axios.get("https://e-commerce-personalized-shopping-with-expert-system-t9j2.vercel.app/api/products/getallproduct");
       setProducts(data)
     }
     fetchData();

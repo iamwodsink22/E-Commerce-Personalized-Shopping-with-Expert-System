@@ -23,7 +23,7 @@ export const getProduct = createAsyncThunk(
     async (id:number, thunkAPI:any) => {
       try {
         
-        const res= await axios.get(`http://localhost:8000/api/products/find/${id}`)
+        const res= await axios.get(`https://e-commerce-personalized-shopping-with-expert-system-t9j2.vercel.app/api/products/find/${id}`)
         return res.data
        
       } catch (error:any) {
@@ -64,7 +64,7 @@ export const getPureHistory = createAsyncThunk(
     async (id:number, thunkAPI:any) => {
       try {
         
-        const res= await axios.get(`http://localhost:8000/api/transaction/purehistory/${id}`)
+        const res= await axios.get(`https://e-commerce-personalized-shopping-with-expert-system-t9j2.vercel.app/api/transaction/purehistory/${id}`)
         
        
         
@@ -85,7 +85,7 @@ export const getPRecProduct = createAsyncThunk(
     async (id:number, thunkAPI:any) => {
       try {
         
-        const res= await axios.get(`http://localhost:8000/api/recs/get/${id}`)
+        const res= await axios.get(`https://e-commerce-personalized-shopping-with-expert-system-t9j2.vercel.app/api/recs/get/${id}`)
         
        
         const c_recs=res.data.recs
@@ -107,7 +107,7 @@ export const getPopular = createAsyncThunk(
     async (_, thunkAPI:any) => {
       try {
         
-        const res= await axios.get(`http://localhost:8000/api/products/getpopular`)
+        const res= await axios.get(`https://e-commerce-personalized-shopping-with-expert-system-t9j2.vercel.app/api/products/getpopular`)
         
        
         const c_recs=res.data.popular
@@ -130,7 +130,7 @@ createAsyncThunk(
     async (_,thunkAPI:any) => {
       try {
         
-        const res=await axios.get('http://localhost:8000/api/products/getcategory',{params:{category:"Smartwatches"}})
+        const res=await axios.get('https://e-commerce-personalized-shopping-with-expert-system-t9j2.vercel.app/api/products/getcategory',{params:{category:"Smartwatches"}})
         
         return res.data
       } catch (error:any) {
@@ -149,7 +149,7 @@ export const getElecProduct = createAsyncThunk(
     async (_, thunkAPI:any) => {
       try {
         
-        const res=await axios.get('http://localhost:8000/api/products/getcategory',{params:{category:"Books"}})
+        const res=await axios.get('https://e-commerce-personalized-shopping-with-expert-system-t9j2.vercel.app/api/products/getcategory',{params:{category:"Books"}})
        
         return res.data
       } catch (error:any) {
@@ -168,7 +168,7 @@ export const getHomeProduct = createAsyncThunk(
     async (_, thunkAPI:any) => {
       try {
        
-        const res=await axios.get('http://localhost:8000/api/products/getcategory',{params:{category:"Shoes | Boots | Slippers | Sandals"}})
+        const res=await axios.get('https://e-commerce-personalized-shopping-with-expert-system-t9j2.vercel.app/api/products/getcategory',{params:{category:"Shoes | Boots | Slippers | Sandals"}})
         
         return res.data
       } catch (error:any) {

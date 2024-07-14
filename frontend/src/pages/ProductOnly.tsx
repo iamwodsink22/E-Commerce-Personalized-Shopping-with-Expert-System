@@ -125,7 +125,7 @@ const Product = () => {
         "total_amount":Math.ceil(product.discounted_price*120),
         "transaction_uuid": uuid
         }
-    const newt=await axios.post('http://localhost:8000/api/payment/initiate',data_raw)
+    const newt=await axios.post('https://e-commerce-personalized-shopping-with-expert-system-t9j2.vercel.app/api/payment/initiate',data_raw)
     const newP=newt.data
 
     
@@ -147,7 +147,7 @@ const Product = () => {
      
      document.body.appendChild(form)
      form.submit()
-     const done=await axios.post('http://localhost:8000/api/transaction/add',{user_id:user?.usr_id,product_id:id,rating:product.ratings,timestamp:Date.now()})
+     const done=await axios.post('https://e-commerce-personalized-shopping-with-expert-system-t9j2.vercel.app/api/transaction/add',{user_id:user?.usr_id,product_id:id,rating:product.ratings,timestamp:Date.now()})
      console.log(done)
       }
       

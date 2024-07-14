@@ -98,7 +98,7 @@ function getSpecs(){
       "total_amount":Math.ceil(product.discounted_price*120),
       "transaction_uuid": crypto.randomUUID()
       }
-  const newt:any=await axios.post('http://localhost:8000/api/payment/initiate',data_raw)
+  const newt:any=await axios.post('https://e-commerce-personalized-shopping-with-expert-system-t9j2.vercel.app/api/payment/initiate',data_raw)
   const newP=newt.data
   
   console.log(newP)
