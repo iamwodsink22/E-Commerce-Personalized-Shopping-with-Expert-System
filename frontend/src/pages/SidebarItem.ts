@@ -11,11 +11,13 @@ export const sidebarItems=[{
     name:'Cart',
     icon:ShoppingCartIcon,
     url:'cart'
-},{
-    name:'Sell',
-    icon:SellIcon,
-    url:'/sell'
-},{
+},
+// },{
+//     name:'Sell',
+//     icon:SellIcon,
+//     url:'/sell'
+// },
+{
     name:'History',
     icon:HistoryIcon,
     url:'history'

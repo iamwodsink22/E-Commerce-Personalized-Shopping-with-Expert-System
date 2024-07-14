@@ -50,7 +50,7 @@ const History = () => {
 {clearedhistory?(<Box display={'flex'}>
     <Box width={"70vw"}>
 
-        {history.map((item:any,index:number)=>{return(<HistoryDetails product={item} rating={purehistory[index].rating} />)})}
+        {history.map((item:any,index:number)=>{return(<HistoryDetails product={item} rating={Math.floor(Math.random() * 6)} />)})}
         </Box>
         <Summary style={{fontFamily:'Poppins', backgroundColor:'#F8F8F8', color:'black', marginLeft:'-3vw', height:'45vh'}}>
             <SummaryTitle style={{fontWeight:'bold'}}>Statistics</SummaryTitle>
