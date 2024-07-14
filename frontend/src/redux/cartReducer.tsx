@@ -71,7 +71,6 @@ const cartSlice=createSlice({
           })
           .addCase(Add2Cart.fulfilled, (state, action) => {
             state.isloading = false;
-            
             console.log(action.payload);
             
           })

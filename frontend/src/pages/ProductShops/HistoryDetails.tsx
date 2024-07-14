@@ -16,7 +16,7 @@ const HistoryDetails:FC<HistoryProps> = ({product,rating}) => {
   const {user}=useAuth()
   const handleChange=async(n:any)=>{
     const res=await axios.put(`/transaction/rate/${user?.usr_id}`,{product_id:product.product_id,rating:n} )
-    if(res.status==200){
+    if(res.status===200){
     
     toast.success("Product rated successfully")
     }

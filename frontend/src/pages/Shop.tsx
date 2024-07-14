@@ -79,12 +79,12 @@ const shoes=useSelector(selectHomeproduct)
       </div>
       
       <Box marginTop={'25vh'}>
-      {history.length==0?(<CatBox products={mostpopular}
-       title={'Most Popular Products'} />):(<CatBox products={personalizedProducts}
-        title={'Personalized Recommendations for you'} />)}
         <CatBox  title={"Smart Watches"} products={watches}/>
       <CatBox title={"Shoes and Slippers"} products={shoes}/></Box>
       <CatBox title={"Books"} products={books}/>
+      {history.length===0?(<CatBox products={mostpopular}
+       title={'Most Popular Products'} />):(<CatBox products={personalizedProducts}
+        title={'Personalized Recommendations for you'} />)}
       
       
     </StyledProductWrapper>

@@ -205,7 +205,7 @@ const productSlice=createSlice({name:"product",initialState,reducers:{
           //   }
           // })
           // console.log(filteredProd)
-          if(filteredProd.length!=0){
+          if(filteredProd.length!==0){
             filteredProd.sort(function(x:any,y:any){return x?.product_name.toLowerCase().includes(query.toLowerCase())?-1:y.product_name.toLowerCase().includes(query.toLowerCase())?1:0})
             
             state.searchproducts=filteredProd
