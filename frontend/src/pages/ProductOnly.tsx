@@ -1,8 +1,8 @@
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
-import {Box,styled,Button, Typography, FormControl,Rating} from "@mui/material";
+import {Box,styled,Button, Typography, Rating} from "@mui/material";
 import { useEffect,useState } from "react";
-import Select from "@mui/material";
+
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Announcement from 'components/Announcement';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -13,13 +13,13 @@ import useAuth from "hooks/useAuth";
 import useTitle from 'hooks/useTitle'
 import { useNavigate, useParams } from 'react-router';
 import axios from 'axios';
-import { ADD_CART, Add2Cart } from 'redux/cartReducer';
+import {  Add2Cart } from 'redux/cartReducer';
 import toast from 'react-hot-toast';
-import { getProduct, getRecProduct, selectCRecproduct,selectIRecproduct, selectElecproduct, selectProduct } from 'redux/productReducer';
+import { getProduct,  selectCRecproduct, selectProduct } from 'redux/productReducer';
 import { H3, H4 } from "components/Typography";
-import SelectInput from "@mui/material/Select/SelectInput";
+
 import ExpandableParagraph from 'components/ExpandableParagraph';
-const Container = styled(Box)
+
 
 
 const Wrapper = styled(Box)(()=>({ padding: '50px',

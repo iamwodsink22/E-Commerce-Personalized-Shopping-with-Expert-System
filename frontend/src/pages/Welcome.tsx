@@ -1,7 +1,7 @@
 import React from 'react'
-import { Box,Card,Typography } from '@mui/material'
+import { Box, } from '@mui/material'
 import { Link } from 'react-router-dom';
-import Shop2OutlinedIcon from '@mui/icons-material/Shop2Outlined';
+
 const Welcome = () => {
   return (
     // <Box width='100%' height='100%'>
