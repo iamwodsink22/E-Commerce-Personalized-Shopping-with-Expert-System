@@ -20,7 +20,7 @@ export const getHistory = createAsyncThunk(
     async (id:number, thunkAPI:any) => {
       try {
         
-        const res= await axios.get(`https://e-commerce-personalized-shopping-with-expert-system-t9j2.vercel.app/api/transaction/history/${id}`)
+        const res= await axios.get(`https://e-commerce-api-lovat-sigma.vercel.app/api/transaction/history/${id}`)
         return res.data
        
       } catch (error:any) {
@@ -39,7 +39,7 @@ export const clearHistory = createAsyncThunk(
     async (id:number, thunkAPI:any) => {
       try {
         
-        const res= await axios.delete(`https://e-commerce-personalized-shopping-with-expert-system-t9j2.vercel.app/api/transaction/clear/${id}`)
+        const res= await axios.delete(`https://e-commerce-api-lovat-sigma.vercel.app/api/transaction/clear/${id}`)
         return res.data
        
       } catch (error:any) {
