@@ -17,7 +17,7 @@ export const getCart = createAsyncThunk(
         let cart=[]
         
         console.log(email)
-        const res= await axios.get(`https://e-commerce-personalized-shopping-with-expert-system-t9j2.vercel.app/api/cart/getcart/${email}`)
+        const res= await axios.get(`https://e-commerce-api-lovat-sigma.vercel.app/api/cart/getcart/${email}`)
       
         console.log(res)
         for(let i=0;i<res.data.length;i++){
@@ -40,7 +40,7 @@ export const Add2Cart = createAsyncThunk(
     async (obj:Object, thunkAPI:any) => {
       try {
        
-        return await axios.post('https://e-commerce-personalized-shopping-with-expert-system-t9j2.vercel.app/api/cart/addtocart',obj)
+        return await axios.post('https://e-commerce-api-lovat-sigma.vercel.app/api/cart/addtocart',obj)
       } catch (error:any) {
         const message =
           (error.response &&
