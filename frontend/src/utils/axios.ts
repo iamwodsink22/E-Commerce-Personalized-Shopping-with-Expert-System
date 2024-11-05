@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const axiosInstance = axios.create({baseURL: 'https://e-commerce-personalized-shopping-with-expert-system-t9j2.vercel.app/api'});
+const axiosInstance = axios.create({baseURL: 'https://e-commerce-api-lovat-sigma.vercel.app/api'});
 
 axiosInstance.interceptors.response.use(
   (response) => response,
